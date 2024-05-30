@@ -25,6 +25,19 @@ public class AppHelper
         }
     }
 
+    public static Application StartOrConnect()
+    {
+        try
+        {
+            var app = (Application)Marshal.GetActiveObject(PROGID.SolidEdge_Application);
+            return app;
+        }
+        catch
+        {
+            var app = (Application)Activator.CreateInstance(Type.GetTypeFromProgID(PROGID.SolidEdge_Application));
+        }
+    }
+
 
     /// <summary>
     /// Stops the first found running instance of Solid Edge gracefully.
