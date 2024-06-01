@@ -18,8 +18,4 @@
       <PackageReference Include="Interop.SolidEdge" Version="2024.5.1" />
     </ItemGroup>
 
-    <ItemGroup>
-      <Folder Include="Adapters\" />
-    </ItemGroup>
-
 </Project>

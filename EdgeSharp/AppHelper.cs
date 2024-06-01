@@ -35,6 +35,7 @@ public class AppHelper
         catch
         {
             var app = (Application)Activator.CreateInstance(Type.GetTypeFromProgID(PROGID.SolidEdge_Application));
+            return app;
         }
     }
 
