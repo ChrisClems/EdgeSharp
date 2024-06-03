@@ -34,12 +34,11 @@ public class AppHelper
         }
         catch
         {
-            var app = (Application)Activator.CreateInstance(Type.GetTypeFromProgID(PROGID.SolidEdge_Application));
+            var app = (Application)Activator.CreateInstance(Type.GetTypeFromProgID(PROGID.SolidEdge_Application) ?? throw new InvalidOperationException())!;
             return app;
         }
     }
-
-
+    
     /// <summary>
     /// Stops the first found running instance of Solid Edge gracefully.
     /// </summary>

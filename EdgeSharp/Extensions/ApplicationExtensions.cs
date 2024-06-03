@@ -27,7 +27,7 @@ public static class ApplicationExtensions
         return _openDocsInBackground;
     }
     // Provide an extension that takes an action so that code can be run inline with DoIdle()
-    // Prevents ugly code when DoIdle() is required after each method in a long string of methods
+    // Makes slightly less ugly code when DoIdle() is required after each method in a long string of methods
     internal static void DoIdle(this Application app, Action action)
     {
         action();
