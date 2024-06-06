@@ -8,7 +8,11 @@ public static class DocumentsExtensions
         object RecognizeFeaturesIfPartTemplate = null, object RevisionRuleOption = null,
         object StopFileOpenIfRevisionRuleNotApplicable = null)
     {
-        var document = documents.Open(Filename, DocRelationAutoServer: 0x00000008, AltPath, RecognizeFeaturesIfPartTemplate,
+        RevisionRuleOption ??= 0;
+
+        StopFileOpenIfRevisionRuleNotApplicable ??= false;
+        
+        var document = documents.Open(Filename, 0x00000008, AltPath, RecognizeFeaturesIfPartTemplate,
             RevisionRuleOption, StopFileOpenIfRevisionRuleNotApplicable);
         return document;
     }
