@@ -86,15 +86,8 @@ public class AppHelper
     {
         foreach (var process in Process.GetProcesses())
         {
-            if (!process.ProcessName.StartsWith("Edge.exe")) continue;
-            try
-            {
-                process.Kill();
-            }
-            catch (Exception)
-            {
-                // Ignore
-            }
+            if (process.ProcessName != "Edge") continue;
+            process.Kill();
         }
     }
 }

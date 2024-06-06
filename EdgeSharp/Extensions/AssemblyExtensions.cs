@@ -14,7 +14,7 @@ public static class AssemblyExtensions
         var occurrences = asm.Occurrences;
         foreach (Occurrence occurrence in occurrences)
         {
-            var document = (SolidEdgeDocument)occurrence;
+            var document = (SolidEdgeDocument)occurrence.OccurrenceDocument;
 
             action(document);
 
