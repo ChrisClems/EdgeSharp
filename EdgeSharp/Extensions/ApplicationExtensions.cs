@@ -68,5 +68,6 @@ public static class ApplicationExtensions
         app.DoIdle(() => app.Interactive = !options[2]);
         app.DoIdle(() => app.ScreenUpdating = !options[3]);
         app.DoIdle(() => app.DelayCompute = options[4]);
+// TODO: Check new mask for match with input. Throw exception if not.
     }
 }
