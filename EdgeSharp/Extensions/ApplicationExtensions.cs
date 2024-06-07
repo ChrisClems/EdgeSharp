@@ -1,4 +1,5 @@
-﻿using SolidEdgeFramework;
+﻿using System.Diagnostics.CodeAnalysis;
+using SolidEdgeFramework;
 
 namespace EdgeSharp.Extensions;
 
@@ -6,6 +7,7 @@ public static class ApplicationExtensions
 {
 
     [Flags]
+    [SuppressMessage("ReSharper", "UnusedMember.Global")]
     public enum BackgroundOptions
     {
         None = 0,
@@ -49,7 +51,7 @@ public static class ApplicationExtensions
 
     public static void SetBackgroundOptions(this Application app, BackgroundOptions options)
     {
-        // TODO: Set background options by passing new enum
+        SetBackgroundOptionsMask(app, (int)options);
     }
     
     // Set background options for Application using a bitmask
