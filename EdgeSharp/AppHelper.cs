@@ -26,7 +26,8 @@ public class AppHelper
     }
 
     public static Application StartOrConnect()
-    {
+    { // Refactor: check if SE is running. attempt to connect. throw exception if fail.
+// Ass book param to start SE if not apready running.
         try
         {
             var app = (Application)Marshal.GetActiveObject(PROGID.SolidEdge_Application);
