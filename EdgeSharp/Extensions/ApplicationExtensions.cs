@@ -1,5 +1,7 @@
 ﻿using System.Diagnostics.CodeAnalysis;
+using EdgeSharp.Adapters;
 using SolidEdgeFramework;
+using SolidEdgePart;
 
 namespace EdgeSharp.Extensions;
 
@@ -51,7 +53,13 @@ public static class ApplicationExtensions
 
     public static void SetBackgroundOptions(this Application app, BackgroundOptions options)
     {
-        SetBackgroundOptionsMask(app, (int)options);
+        var optionsMask = (int)options;
+        SetBackgroundOptionsMask(app, optionsMask);
+        var currentMask = GetBackgroundOptionsMask(app);
+        if (optionsMask != currentMask)
+        {
+            throw new Exception("Background options failed to update");
+        }
     }
     
     // Set background options for Application using a bitmask
@@ -70,6 +78,12 @@ public static class ApplicationExtensions
         app.DoIdle(() => app.Interactive = !options[2]);
         app.DoIdle(() => app.ScreenUpdating = !options[3]);
         app.DoIdle(() => app.DelayCompute = options[4]);
+
+        var currentMask = app.GetBackgroundOptionsMask();
+        if (bitMask != currentMask)
+        {
+            throw new Exception("Background options failed to update");
+        }
 // TODO: Check new mask for match with input. Throw exception if not.
     }
 }
