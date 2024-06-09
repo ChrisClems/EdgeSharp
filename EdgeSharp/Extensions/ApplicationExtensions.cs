@@ -20,15 +20,36 @@ public static class ApplicationExtensions
         DelayCompute = 1 << 4 // 16
     }
 
-    // Provide an extension that takes an action so that code can be run inline with DoIdle()
-    // Makes slightly less ugly code when DoIdle() is required after each method in a long string of methods
+    /// <summary>
+    /// Executes a provided action before running DoIdle().
+    /// </summary>
+    /// <param name="app">The Solid Edge application object.</param>
+    /// <param name="action">The action to be executed.</param>
     public static void DoIdle(this Application app, Action action)
     {
         action();
         app.DoIdle();
     }
 
-    // Return enum of options that represent the backgrounding options for an Application
+    /// <summary>
+    /// Executes an action from a list of actions and calls DoIdle() to allow Solid Edge to perform idle time activities.
+    /// </summary>
+    /// <param name="app">The Solid Edge application object.</param>
+    /// <param name="actions">The actions to be executed.</param>
+    public static void DoIdle(this Application app, Action[] actions)
+    {
+        foreach (var action in actions)
+        {
+            action();
+            app.DoIdle();
+        }
+    }
+
+    /// <summary>
+    /// Returns the background options of the application object.
+    /// </summary>
+    /// <param name="app">The Solid Edge application object.</param>
+    /// <returns>The background options of the application.</returns>
     public static BackgroundOptions GetBackgroundOptions(this Application app)
     {
         bool[] optionsArray = [!app.Visible, !app.DisplayAlerts, !app.Interactive, !app.ScreenUpdating, app.DelayCompute];
@@ -44,13 +65,21 @@ public static class ApplicationExtensions
         return backgroundOptions;
     }
     
-    // Returns a bitmask representing the boolean values that represent
-    // various background options of the application object
+    /// <summary>
+    /// Returns a bitmask representing the boolean values that represent various background options of the application object.
+    /// </summary>
+    /// <param name="app">The Solid Edge application object.</param>
+    /// <returns>A bitmask representing the boolean values that represent various background options of the application object.</returns>
     public static int GetBackgroundOptionsMask(this Application app)
     {
         return (int)GetBackgroundOptions(app);
     }
 
+    /// <summary>
+    /// Updates the background options for a Solid Edge application object.
+    /// </summary>
+    /// <param name="app">The Solid Edge application object.</param>
+    /// <param name="options">The background options to be set.</param>
     public static void SetBackgroundOptions(this Application app, BackgroundOptions options)
     {
         var optionsMask = (int)options;
@@ -62,7 +91,11 @@ public static class ApplicationExtensions
         }
     }
     
-    // Set background options for Application using a bitmask
+    /// <summary>
+    /// Sets the background options of the Solid Edge application object using a bitmask.
+    /// </summary>
+    /// <param name="app">The Solid Edge application object.</param>
+    /// <param name="bitMask">The bitmask representing the boolean values that represent the various background options.</param>
     public static void SetBackgroundOptionsMask(this Application app, int bitMask)
     {
         var options = new List<bool>();
