@@ -9,7 +9,7 @@ namespace EdgeSharp.Extensions;
 public static class AssemblyExtensions
 {
     // Process all Solid Edge documents in assembly using delegate action
-    public static void TraverseOccurrencesWithAction(this AssemblyDocument asm, Action<SolidEdgeDocument> action, bool recursive)
+    public static void TraverseAssemblyWithAction(this AssemblyDocument asm, Action<SolidEdgeDocument> action, bool recursive)
     {
         var occurrences = asm.Occurrences;
         foreach (Occurrence occurrence in occurrences)
@@ -21,7 +21,7 @@ public static class AssemblyExtensions
             if (recursive && document.Type == DocumentTypeConstants.igAssemblyDocument)
             {
                 var asmDoc = (AssemblyDocument)document;
-                asmDoc.TraverseOccurrencesWithAction(action, recursive);
+                asmDoc.TraverseAssemblyWithAction(action, recursive);
             }
         }
     }

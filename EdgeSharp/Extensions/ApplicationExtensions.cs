@@ -84,6 +84,5 @@ public static class ApplicationExtensions
         {
             throw new Exception("Background options failed to update");
         }
-// TODO: Check new mask for match with input. Throw exception if not.
     }
 }
