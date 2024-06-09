@@ -25,18 +25,23 @@ public class AppHelper
         }
     }
 
-    public static Application StartOrConnect()
+    /// <summary>
+    /// Establishes a connection with the Solid Edge application.
+    /// </summary>
+    /// <param name="startIfNotRunning">Specifies whether to start a new instance of Solid Edge if it is not already running.</param>
+    /// <returns>Returns an instance of the Solid Edge application if the connection is successful, or null if the connection is not established.</returns>
+    public static Application Connect(bool startIfNotRunning = true)
     {
-        try
+        Application app;
+        if (!startIfNotRunning && !IsSolidEdgeRunning()) return null;
+        if (IsSolidEdgeRunning())
         {
-            var app = (Application)Marshal.GetActiveObject(PROGID.SolidEdge_Application);
+            app = (Application)Marshal.GetActiveObject(PROGID.SolidEdge_Application);
             return app;
         }
-        catch
-        {
-            var app = (Application)Activator.CreateInstance(Type.GetTypeFromProgID(PROGID.SolidEdge_Application) ?? throw new InvalidOperationException())!;
-            return app;
-        }
+        app = (Application)Activator.CreateInstance(Type.GetTypeFromProgID(PROGID.SolidEdge_Application) ?? throw new InvalidOperationException())!;
+        return app;
+
     }
     
     /// <summary>
