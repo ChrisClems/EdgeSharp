@@ -16,7 +16,7 @@ public class PartDocumentAdapter : IPartMetalDocument
         _partDocument = partDocument;
     }
 
-    public override void Activate()
+    public void Activate()
     {
         _partDocument.Activate();
     }

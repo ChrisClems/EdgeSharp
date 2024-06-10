@@ -16,7 +16,7 @@ public class SheetMetalDocumentAdapter : IPartMetalDocument
         _sheetMetalDocument = sheetMetalDocument;
     }
 
-    public override void Activate()
+    public void Activate()
     {
         _sheetMetalDocument.Activate();
     }
@@ -120,16 +120,6 @@ public class SheetMetalDocumentAdapter : IPartMetalDocument
     public void SaveAsPRC(string FileName)
     {
         _sheetMetalDocument.SaveAsPRC(FileName);
-    }
-
-    public int UndoTransactionCount()
-    {
-        return _sheetMetalDocument.UndoTransactionCount();
-    }
-
-    public int RedoTransactionCount()
-    {
-        return _sheetMetalDocument.RedoTransactionCount();
     }
 
     public void FreezeAllInterpartLinks()
@@ -509,11 +499,6 @@ public class SheetMetalDocumentAdapter : IPartMetalDocument
     public void CopytoPMI(object featureObj, seCopytoPMIConstants Type)
     {
         _sheetMetalDocument.CopytoPMI(featureObj, Type);
-    }
-
-    public void ArrangeDimensionsInSelectSet(double dStackPitchMultiplier, bool bAssociative)
-    {
-        _sheetMetalDocument.ArrangeDimensionsInSelectSet(dStackPitchMultiplier, bAssociative);
     }
 
     public Application Application => _sheetMetalDocument.Application;
