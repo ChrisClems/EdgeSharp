@@ -122,16 +122,6 @@ public class PartDocumentAdapter : IPartMetalDocument
         _partDocument.SaveAsPRC(FileName);
     }
 
-    public int UndoTransactionCount()
-    {
-        return _partDocument.UndoTransactionCount();
-    }
-
-    public int RedoTransactionCount()
-    {
-        return _partDocument.RedoTransactionCount();
-    }
-
     public void FreezeAllInterpartLinks()
     {
         _partDocument.FreezeAllInterpartLinks();
@@ -521,11 +511,6 @@ public class PartDocumentAdapter : IPartMetalDocument
     public void CopytoPMI(object featureObj, seCopytoPMIConstants Type)
     {
         _partDocument.CopytoPMI(featureObj, Type);
-    }
-
-    public void ArrangeDimensionsInSelectSet(double dStackPitchMultiplier, bool bAssociative)
-    {
-        _partDocument.ArrangeDimensionsInSelectSet(dStackPitchMultiplier, bAssociative);
     }
 
     public Application Application => _partDocument.Application;
