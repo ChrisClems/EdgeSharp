@@ -1,6 +1,6 @@
 # EdgeSharp
 
-EdgeSharp is a .NET library for interacting with Solid Edge. It is the spiritual successor to SolidEdge.Community, built on modern versions of .NET.
+EdgeSharp is a .NET library for interacting with Solid Edge. It is the spiritual successor to [SolidEdge.Community](https://github.com/SolidEdgeCommunity/SolidEdge.Community), built on modern versions of .NET.
 ## EdgeSharp is in a very much experimental stage. Do not build apps on this library expecting API stability.
 
 An initial set of helpers and extensions is being added from my personal library of mixed Solid Edge interop apps.
