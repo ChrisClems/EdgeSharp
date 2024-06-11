@@ -35,7 +35,7 @@ public static class DocumentExtensions
             }
             // Don't know how this happened. Should not be possible.
             // If it happens, report as issue: https://github.com/ChrisClems/EdgeSharp/issues
-            catch (Exception ex) when (e is NullReferenceException | e is ArgumentNullException)
+            catch (Exception ex) when (ex is NullReferenceException | ex is ArgumentNullException)
             {
                 throw new Exception(
                         $"PropertySet Dict Key null exception on {doc.Name}. Please report as issue with SE document file attached: https://github.com/ChrisClems/EdgeSharp/issues ", ex);
