@@ -7,7 +7,7 @@ The initial goal of EdgeSharp is to implement [Interop.SolidEdge](https://github
 
 As development progresses, features will be added as helper utilities, extension methods, and adapter interfaces based on patterns in my own workflow where I've benefitted from creating boilerplate snippets that I've reused in multiple projects. Old SolidEdge.Community extensions can be easily implemented. Feel free to open an issue with a link to the original code.
 
-Initial COM code updated for .NET 6 was obtained from [@DerekGooding].
+Initial COM code updated for .NET 6 was obtained from @DerekGooding.
 
 ## Examples
 
