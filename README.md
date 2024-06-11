@@ -78,3 +78,9 @@ Future functionality on the roadmap:
 * Offline (Solid Edge not running) property reading and writing
 * Ini file management for export settings config
 * Proper documentation generation
+
+## Build:
+
+Build [Interop.SolidEdge](https://github.com/ChrisClems/Interop.SolidEdge) (That README update is an old placeholder, ignore it) using a machine with Solid Edge installed. Reference the Interop.SolidEdge.dll produced by that project in your EdgeSharp project. That should satisfy the dependencies of EdgeSharp.
+
+Future versions will better integrate the interop library into the EdgeSharp build process.
