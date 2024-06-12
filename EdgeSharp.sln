@@ -2,8 +2,6 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EdgeSharp", "EdgeSharp\EdgeSharp.csproj", "{9274FAD6-8ACA-49EE-9884-8735E631DDD3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EdgeSharp.Tests", "EdgeSharp.Tests\EdgeSharp.Tests.csproj", "{6A6DFA58-6384-4682-8964-54BDBEF31484}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -14,9 +12,5 @@ Global
 		{9274FAD6-8ACA-49EE-9884-8735E631DDD3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9274FAD6-8ACA-49EE-9884-8735E631DDD3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9274FAD6-8ACA-49EE-9884-8735E631DDD3}.Release|Any CPU.Build.0 = Release|Any CPU
-		{6A6DFA58-6384-4682-8964-54BDBEF31484}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{6A6DFA58-6384-4682-8964-54BDBEF31484}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{6A6DFA58-6384-4682-8964-54BDBEF31484}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{6A6DFA58-6384-4682-8964-54BDBEF31484}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

@@ -39,7 +39,7 @@ partial interface IMessageFilter
 /// Class that implements the OLE IMessageFilter interface.
 /// </summary>
 [GeneratedComClass]
-public partial class OleMessageFilter : IMessageFilter
+internal partial class OleMessageFilter : IMessageFilter
 {
     [LibraryImport("Ole32.dll")]
     private static partial int CoRegisterMessageFilter(IMessageFilter newFilter, out IMessageFilter oldFilter);
