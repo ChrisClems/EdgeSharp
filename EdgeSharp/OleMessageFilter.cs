@@ -72,7 +72,7 @@ internal partial class OleMessageFilter : IMessageFilter
     /// Thread.CurrentThread.GetApartmentState() must equal ApartmentState.STA. In console applications, this can
     /// be achieved by applying the STAThreadAttribute to the Main() method. In WinForm applications, it is default.
     /// </remarks>
-    public static void Register()
+    private static void Register()
     {
         IMessageFilter newFilter = new OleMessageFilter();
         IMessageFilter oldFilter = null;
@@ -97,7 +97,7 @@ internal partial class OleMessageFilter : IMessageFilter
     /// It is not necessary to call Unregister() unless you need to explicitly do so as it is handled
     /// in the destructor.
     /// </remarks>
-    internal static void Unregister()
+    private static void Unregister()
     {
         IMessageFilter oldFilter = null;
 
