@@ -25,9 +25,8 @@ jobs:
       run: docfx build
 
     - name: Deploy to GitHub Pages
-      uses: peaceiris/actions-gh-pages@v3
+      uses: actions/deploy-pages@v1  # Updated action for GitHub Pages deployment
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
         publish_dir: ./_site
-        publish_branch: gh-pages  # Ensure this matches your deployment branch
-
+        branch: gh-pages  # Ensure this matches your deployment branch
