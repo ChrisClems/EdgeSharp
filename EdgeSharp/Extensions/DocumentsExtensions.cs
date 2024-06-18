@@ -1,4 +1,5 @@
 ﻿using SolidEdgeFramework;
+// ReSharper disable InconsistentNaming
 
 namespace EdgeSharp.Extensions;
 

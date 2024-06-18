@@ -72,7 +72,7 @@ internal partial class OleMessageFilter : IMessageFilter
     /// Thread.CurrentThread.GetApartmentState() must equal ApartmentState.STA. In console applications, this can
     /// be achieved by applying the STAThreadAttribute to the Main() method. In WinForm applications, it is default.
     /// </remarks>
-    private static void Register()
+    internal static void Register()
     {
         IMessageFilter newFilter = new OleMessageFilter();
         IMessageFilter oldFilter = null;

@@ -36,9 +36,11 @@ public class AppHelper
         if (!startIfNotRunning && !IsSolidEdgeRunning()) return null;
         if (IsSolidEdgeRunning())
         {
+            OleMessageFilter.Register();
             app = (Application)Marshal.GetActiveObject(PROGID.SolidEdge_Application);
             return app;
         }
+        OleMessageFilter.Register();
         app = (Application)Activator.CreateInstance(Type.GetTypeFromProgID(PROGID.SolidEdge_Application) ?? throw new InvalidOperationException())!;
         return app;
 
