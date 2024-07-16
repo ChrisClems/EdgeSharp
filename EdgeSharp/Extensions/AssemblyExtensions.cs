@@ -19,15 +19,19 @@ public static class AssemblyExtensions
         var occurrences = asm.Occurrences;
         foreach (Occurrence occurrence in occurrences)
         {
+            var isAsm = false;
             var document = (SolidEdgeDocument)occurrence.OccurrenceDocument;
+
+            if (document.Type == DocumentTypeConstants.igAssemblyDocument)
+            {
+                isAsm = true;
+            }
 
             action(document);
 
-            if (recursive && document.Type == DocumentTypeConstants.igAssemblyDocument)
-            {
-                var asmDoc = (AssemblyDocument)document;
-                asmDoc.TraverseAssemblyWithAction(action, recursive);
-            }
+            if (!recursive || !isAsm) continue;
+            var asmDoc = (AssemblyDocument)document;
+            asmDoc.TraverseAssemblyWithAction(action, recursive);
         }
     }
 
@@ -55,6 +59,12 @@ public static class AssemblyExtensions
                 asmDoc.TraverseAssemblyWithAction(actions, recursive);
             }
         }
+    }
+    
+    public static void TraverseOccurrencesWithAction(this AssemblyDocument asm, Action<Occurrence> action,
+        bool recursive)
+    {
+        // Walk occurrence and suboccurrence tree instead of assembly tree.
     }
 
     /// <summary>

@@ -11,7 +11,7 @@ public static class SheetMetalDocumentExtensions
     /// </summary>
     /// <param name="doc">The Sheet Metal Document to be saved.</param>
     /// <param name="newName">The new path and filename for the Part Document.</param>
-    public static void ForceSaveAsPart(this SheetMetalDocument doc, string newName)
+    public static void ForceSaveAsPartDocument(this SheetMetalDocument doc, string newName)
     {
         // TODO: Error handling.
         var partClsid = new System.Guid("23c52e80-4698-11ce-b307-0800363a1e02");
