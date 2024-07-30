@@ -7,10 +7,11 @@ public static class PartDocumentExtensions
 {
     /// <summary>
     /// Forces the specified Part Document to be saved as a Sheet Metal Document.
-    /// WARNING: EXPERIMENTAL! MODIFIES THE CLSID OF THE COM STRUCTURED STORAGE FILE.
+    /// !!! WARNING: EXPERIMENTAL! MODIFIES THE CLSID OF THE COM STRUCTURED STORAGE FILE. !!!
+    /// !!! MAY CORRUPT FILES !!!
     /// </summary>
     /// <param name="doc">The Part Document to be saved.</param>
-    /// <param name="newName">The new path and filename for the Sheet Metal Document.</param>
+    /// <param name="newName">The new path and filename for the Sheet Metal Document. Does not support overwrite.</param>
     public static void ForceSaveAsSheetMetalDocument(this PartDocument doc, string newName)
     {
         // TODO: Error handling.
