@@ -60,11 +60,96 @@ public static class AssemblyExtensions
             }
         }
     }
-    
+
+    /// <summary>
+    /// Traverses the occurrences of an assembly document and performs an action on each occurrence using a delegate.
+    /// </summary>
+    /// <param name="asm">The assembly document to traverse.</param>
+    /// <param name="action">The action to perform on each occurrence.</param>
+    /// <param name="recursive">Optional. Indicates whether the traversal should be performed recursively in child assembly documents. Default is true.</param>
     public static void TraverseOccurrencesWithAction(this AssemblyDocument asm, Action<Occurrence> action,
         bool recursive)
     {
-        // Walk occurrence and suboccurrence tree instead of assembly tree.
+        var occurrences = asm.Occurrences;
+        foreach (Occurrence occurrence in occurrences)
+        {
+            action(occurrence);
+            if (!occurrence.Subassembly) continue;
+            if (!recursive) continue;
+            var subOccurrences = occurrence.SubOccurrences;
+            foreach (SubOccurrence subOccurrence in subOccurrences)
+            {
+                action(subOccurrence.ThisAsOccurrence);
+                if (!subOccurrence.Subassembly) continue;
+                TraverseSubOccurrences(subOccurrence, action);
+            }
+        }
+    }
+    
+    /// <summary>
+    /// Traverses the occurrences of an assembly document and performs an action on each occurrence using a delegate.
+    /// </summary>
+    /// <param name="asm">The assembly document to traverse.</param>
+    /// <param name="actions">The actions to perform on each occurrence.</param>
+    /// <param name="recursive">Optional. Indicates whether the traversal should be performed recursively in child assembly documents. Default is true.</param>
+    public static void TraverseOccurrencesWithAction(this AssemblyDocument asm, Action<Occurrence>[] actions,
+        bool recursive)
+    {
+        var occurrences = asm.Occurrences;
+        foreach (Occurrence occurrence in occurrences)
+        {
+            foreach (var action in actions)
+            {
+                action(occurrence);
+            }
+            if (!occurrence.Subassembly) continue;
+            if (!recursive) continue;
+            var subOccurrences = occurrence.SubOccurrences;
+            foreach (SubOccurrence subOccurrence in subOccurrences)
+            {
+                foreach (var action in actions)
+                {
+                    action(subOccurrence.ThisAsOccurrence);
+                }
+                if (!subOccurrence.Subassembly) continue;
+                TraverseSubOccurrences(subOccurrence, actions);
+            }
+        }
+    }
+
+    /// <summary>
+    /// Recursively traverses SubOccurrences of a SubOccurrence SubAssembly and performs the delegate action
+    /// </summary>
+    /// <param name="subOccurrence">The sub-occurrence to start traversal from.</param>
+    /// <param name="action">The action to perform on Solid Edge occurrences.</param>
+    private static void TraverseSubOccurrences(SubOccurrence subOccurrence, Action<Occurrence> action)
+    {
+        var subOccurrences = subOccurrence.SubOccurrences;
+        foreach (SubOccurrence subSubOccurrence in subOccurrences)
+        {
+            action(subSubOccurrence.ThisAsOccurrence);
+            if (!subSubOccurrence.Subassembly) continue;
+            TraverseSubOccurrences(subSubOccurrence, action);
+        }
+    }
+    
+    /// <summary>
+    /// Recursively traverses SubOccurrences of a SubOccurrence SubAssembly and performs the delegate action
+    /// </summary>
+    /// <param name="subOccurrence">The sub-occurrence to start traversal from.</param>
+    /// <param name="actions">The actions to perform on Solid Edge occurrences.</param>
+    private static void TraverseSubOccurrences(SubOccurrence subOccurrence, Action<Occurrence>[] actions)
+    {
+        var subOccurrences = subOccurrence.SubOccurrences;
+        foreach (SubOccurrence subSubOccurrence in subOccurrences)
+        {
+            foreach (var action in actions)
+            {
+                action(subSubOccurrence.ThisAsOccurrence);
+            }
+            if (!subSubOccurrence.Subassembly) continue;
+            TraverseSubOccurrences(subSubOccurrence, actions);
+        }
     }
 
     /// <summary>
