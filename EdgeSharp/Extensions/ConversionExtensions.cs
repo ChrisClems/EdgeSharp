@@ -18,5 +18,10 @@ public static class ConversionExtensions
     {
         return degrees * (Math.PI / 180);
     }
+
+    public static double RadiansToDegrees(this double radians)
+    {
+        return radians * (180 / Math.PI);
+    }
     
 }
