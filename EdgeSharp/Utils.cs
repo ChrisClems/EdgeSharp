@@ -1,27 +1,27 @@
 ﻿using System.Collections;
+using SolidEdgeFramework;
+using DocumentTypeConstants = SolidEdgeConstants.DocumentTypeConstants;
 
 namespace EdgeSharp;
 
 public class Utils
 {
-    internal static int GenerateBitMask(bool[] bools)
+    /// <summary>
+    /// Retrieves the first parent part or sheet metal document from the arbitrary object as a SolidEdgeDocument
+    /// </summary>
+    /// <param name="seObject">The Solid Edge object.</param>
+    /// <returns>The first part or sheet metal document in the parent tree of the given object.</returns>
+    public static SolidEdgeDocument GetFirstParentDocFromObject(object seObject)
     {
-        BitArray bits = new BitArray(bools);
-        if (bits.Length > 32) throw new ArgumentException("The BitArray is too large to fit in an integer.");
-
-        int[] array = new int[1];
-        bits.CopyTo(array, 0);
-        return array[0];
-    }
-
-    internal static BitArray BitsFromMask(int mask, int length)
-    {
-        BitArray bits = new BitArray(new int[] { mask });
-        BitArray trimmedBits = new BitArray(length);
-        for (int i = 0; i < length; i++)
+        dynamic comObject = seObject;
+        var parent = comObject.Parent;
+        var parentType = (DocumentTypeConstants)parent.Type;
+        if (parentType is DocumentTypeConstants.igSheetMetalDocument
+            or DocumentTypeConstants.igPartDocument)
         {
-            trimmedBits[i] = bits[i];
+            return (SolidEdgeDocument)parent;
         }
-        return trimmedBits;
+
+        return GetFirstParentDocFromObject(parent);
     }
 }
