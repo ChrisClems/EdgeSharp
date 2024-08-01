@@ -1,4 +1,6 @@
-﻿using System.Diagnostics.CodeAnalysis;
+﻿using System.Diagnostics;
+using System.Diagnostics.CodeAnalysis;
+using System.Net;
 using SolidEdgeAssembly;
 using SolidEdgeFramework;
 using SolidEdgePart;
@@ -14,7 +16,7 @@ public static class AssemblyExtensions
     /// <param name="asm">The assembly document to traverse.</param>
     /// <param name="action">The action to perform on Solid Edge documents.</param>
     /// <param name="recursive">Optional. Indicates whether the traversal should be performed recursively in child assembly documents. Default is true.</param>
-    public static void TraverseAssemblyWithAction(this AssemblyDocument asm, Action<SolidEdgeDocument> action, bool recursive)
+    public static void TraverseAssemblyWithAction(this AssemblyDocument asm, Action<SolidEdgeDocument> action, bool recursive = true)
     {
         var occurrences = asm.Occurrences;
         foreach (Occurrence occurrence in occurrences)
@@ -41,7 +43,7 @@ public static class AssemblyExtensions
     /// <param name="asm">The assembly document to traverse.</param>
     /// <param name="actions">The actions to perform on Solid Edge documents.</param>
     /// <param name="recursive">Optional. Indicates whether the traversal should be performed recursively in child assembly documents. Default is true.</param>
-    public static void TraverseAssemblyWithAction(this AssemblyDocument asm, Action<SolidEdgeDocument>[] actions, bool recursive)
+    public static void TraverseAssemblyWithAction(this AssemblyDocument asm, Action<SolidEdgeDocument>[] actions, bool recursive = true)
     {
         var occurrences = asm.Occurrences;
         foreach (Occurrence occurrence in occurrences)
@@ -68,15 +70,17 @@ public static class AssemblyExtensions
     /// <param name="action">The action to perform on each occurrence.</param>
     /// <param name="recursive">Optional. Indicates whether the traversal should be performed recursively in child assembly documents. Default is true.</param>
     public static void TraverseOccurrencesWithAction(this AssemblyDocument asm, Action<Occurrence> action,
-        bool recursive)
+        bool recursive = true)
     {
         var occurrences = asm.Occurrences;
+        if (occurrences == null) return;
         foreach (Occurrence occurrence in occurrences)
         {
             action(occurrence);
             if (!occurrence.Subassembly) continue;
             if (!recursive) continue;
             var subOccurrences = occurrence.SubOccurrences;
+            if (subOccurrences == null) continue;
             foreach (SubOccurrence subOccurrence in subOccurrences)
             {
                 action(subOccurrence.ThisAsOccurrence);
@@ -93,7 +97,7 @@ public static class AssemblyExtensions
     /// <param name="actions">The actions to perform on each occurrence.</param>
     /// <param name="recursive">Optional. Indicates whether the traversal should be performed recursively in child assembly documents. Default is true.</param>
     public static void TraverseOccurrencesWithAction(this AssemblyDocument asm, Action<Occurrence>[] actions,
-        bool recursive)
+        bool recursive = true)
     {
         var occurrences = asm.Occurrences;
         foreach (Occurrence occurrence in occurrences)
@@ -125,12 +129,15 @@ public static class AssemblyExtensions
     private static void TraverseSubOccurrences(SubOccurrence subOccurrence, Action<Occurrence> action)
     {
         var subOccurrences = subOccurrence.SubOccurrences;
+        if (subOccurrences == null) return;
         foreach (SubOccurrence subSubOccurrence in subOccurrences)
         {
             action(subSubOccurrence.ThisAsOccurrence);
             if (!subSubOccurrence.Subassembly) continue;
             TraverseSubOccurrences(subSubOccurrence, action);
         }
+
+        
     }
     
     /// <summary>
@@ -141,6 +148,7 @@ public static class AssemblyExtensions
     private static void TraverseSubOccurrences(SubOccurrence subOccurrence, Action<Occurrence>[] actions)
     {
         var subOccurrences = subOccurrence.SubOccurrences;
+        if (subOccurrences == null) return;
         foreach (SubOccurrence subSubOccurrence in subOccurrences)
         {
             foreach (var action in actions)
