@@ -1,7 +1,4 @@
-﻿using System.Diagnostics.CodeAnalysis;
-using EdgeSharp.Adapters;
-using SolidEdgeFramework;
-using SolidEdgePart;
+﻿using SolidEdgeFramework;
 
 namespace EdgeSharp.Extensions;
 
@@ -9,7 +6,6 @@ public static class ApplicationExtensions
 {
 
     [Flags]
-    [SuppressMessage("ReSharper", "UnusedMember.Global")]
     public enum BackgroundOptions
     {
         None = 0,

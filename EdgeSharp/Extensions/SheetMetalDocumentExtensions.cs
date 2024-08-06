@@ -15,7 +15,7 @@ public static class SheetMetalDocumentExtensions
     public static void ForceSaveAsPartDocument(this SheetMetalDocument doc, string newName)
     {
         // TODO: Error handling.
-        var partClsid = new System.Guid("23c52e80-4698-11ce-b307-0800363a1e02");
+        var partClsid = new Guid("23c52e80-4698-11ce-b307-0800363a1e02");
         var originalDocPath = Path.GetFullPath(doc.FullName);
         var compoundFile = new CompoundFile(originalDocPath);
         var rootStorage = compoundFile.RootStorage;

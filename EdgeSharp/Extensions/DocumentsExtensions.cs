@@ -17,9 +17,9 @@ public static class DocumentsExtensions
     /// <returns>
     /// The opened document object.
     /// </returns>
-    public static object OpenInBackground(this Documents documents, string Filename, object AltPath = null,
-        object RecognizeFeaturesIfPartTemplate = null, object RevisionRuleOption = null,
-        object StopFileOpenIfRevisionRuleNotApplicable = null)
+    public static object OpenInBackground(this Documents documents, string Filename, object? AltPath = null,
+        object? RecognizeFeaturesIfPartTemplate = null, object? RevisionRuleOption = null,
+        object? StopFileOpenIfRevisionRuleNotApplicable = null)
     {
         RevisionRuleOption ??= 0;
 

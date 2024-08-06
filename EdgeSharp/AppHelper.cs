@@ -1,6 +1,4 @@
-﻿using System.Runtime.InteropServices;
-using System.Runtime.InteropServices.Marshalling;
-using System.Diagnostics;
+﻿using System.Diagnostics;
 using SolidEdgeFramework;
 using SolidEdgeSDK;
 
@@ -16,8 +14,8 @@ public class AppHelper
     {
         try
         {
-            var comObjectHandle = Marshal.GetActiveObject("SolidEdge.Application");
-            return comObjectHandle != null;
+            Marshal.GetActiveObject("SolidEdge.Application");
+            return true;
         }
         catch
         {
@@ -30,9 +28,9 @@ public class AppHelper
     /// </summary>
     /// <param name="startIfNotRunning">Specifies whether to start a new instance of Solid Edge if it is not already running.</param>
     /// <returns>Returns an instance of the Solid Edge application if the connection is successful, or null if the connection is not established.</returns>
-    public static Application Connect(bool startIfNotRunning = true)
+    public static Application? Connect(bool startIfNotRunning = true)
     {
-        Application app;
+        Application? app;
         if (!startIfNotRunning && !IsSolidEdgeRunning()) return null;
         if (IsSolidEdgeRunning())
         {
@@ -56,7 +54,6 @@ public class AppHelper
             var app = (Application)Marshal.GetActiveObject(PROGID.SolidEdge_Application);
             app.Quit();
             System.Runtime.InteropServices.Marshal.ReleaseComObject(app);
-            app = null;
         }
         catch
         {
@@ -72,7 +69,6 @@ public class AppHelper
     {
         app.Quit();
         System.Runtime.InteropServices.Marshal.ReleaseComObject(app);
-        app = null;
     }
 
     /// <summary>

@@ -1,7 +1,5 @@
-﻿using System.Diagnostics;
-using System.Runtime.InteropServices;
+﻿using System.Runtime.InteropServices;
 using SolidEdgePart;
-using System.Threading;
 using Thread = System.Threading.Thread;
 
 namespace EdgeSharp.Extensions;

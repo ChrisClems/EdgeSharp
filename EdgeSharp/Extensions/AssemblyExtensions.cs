@@ -1,9 +1,6 @@
-﻿using System.Diagnostics;
-using System.Diagnostics.CodeAnalysis;
-using System.Net;
+﻿using System.Diagnostics.CodeAnalysis;
 using SolidEdgeAssembly;
 using SolidEdgeFramework;
-using SolidEdgePart;
 
 namespace EdgeSharp.Extensions;
 
