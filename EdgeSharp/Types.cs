@@ -9,6 +9,11 @@ public class Coordinate
     public double Z { get; set; }
     
 }
+
+/// <summary>
+/// Represents a structural frame section.
+/// A custom type to organize structural frame section/segment properties.
+/// </summary>
 public class StructuralFrameSection
 {
     public int SectionId { get; private set; }

@@ -8,6 +8,13 @@ namespace EdgeSharp.Extensions;
 
 public static class ProfileExtensions
 {
+    /// <summary>
+    /// Retries the paste operation on a profile in Solid Edge.
+    /// </summary>
+    /// <param name="profile">The profile to paste.</param>
+    /// <param name="retryCount">The maximum number of retry attempts. Default value is -1 (unlimited).</param>
+    /// <param name="retryDelay">The delay (in milliseconds) between each retry attempt. Default value is 100 milliseconds.</param>
+    /// <exception cref="System.Exception">Thrown when an error occurs while pasting the profile.</exception>
     public static void PasteRetry(this Profile profile, int retryCount = -1, int retryDelay = 100)
     {
         const uint CLIPBRD_E_CANT_OPEN = 0x800401D0;
