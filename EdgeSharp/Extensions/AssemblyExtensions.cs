@@ -1,4 +1,5 @@
 ﻿using System.Diagnostics.CodeAnalysis;
+using EdgeSharp.Adapters;
 using SolidEdgeAssembly;
 using SolidEdgeFramework;
 
@@ -158,6 +159,42 @@ public static class AssemblyExtensions
             }
             if (!subSubOccurrence.Subassembly) continue;
             TraverseSubOccurrences(subSubOccurrence, actions);
+        }
+    }
+    
+    public static void TraverseSubOccurrencesWithAction(this AssemblyDocument asm, Action<IOccurrenceEsx> action,
+        bool recursive = true)
+    {
+        var occurrences = asm.Occurrences;
+        if (occurrences == null) return;
+        foreach (Occurrence occurrence in occurrences)
+        {
+            IOccurrenceEsx occurrenceAdapter = new OccurrenceAdapter(occurrence);
+            action(occurrenceAdapter);
+            if (!occurrenceAdapter.Subassembly) continue;
+            if (!recursive) continue;
+            var subOccurrences = occurrenceAdapter.SubOccurrences;
+            if (subOccurrences == null) continue;
+            foreach (SubOccurrence subOccurrence in subOccurrences)
+            {
+                IOccurrenceEsx subOccurrenceAdapter = new SubOccurrenceAdapter(subOccurrence);
+                action(subOccurrenceAdapter);
+                if (!subOccurrenceAdapter.Subassembly) continue;
+                TraverseIOccurrenceEsx(subOccurrenceAdapter, action);
+            }
+        }
+    }
+    
+    private static void TraverseIOccurrenceEsx(IOccurrenceEsx subOccurrence, Action<IOccurrenceEsx> action)
+    {
+        var subOccurrences = subOccurrence.SubOccurrences;
+        if (subOccurrences == null) return;
+        foreach (SubOccurrence subSubOccurrence in subOccurrences)
+        {
+            IOccurrenceEsx subOccurrenceAdapter = new SubOccurrenceAdapter(subSubOccurrence);
+            action(subOccurrenceAdapter);
+            if (!subOccurrenceAdapter.Subassembly) continue;
+            TraverseIOccurrenceEsx(subOccurrenceAdapter, action);
         }
     }
 
