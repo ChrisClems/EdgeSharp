@@ -4,6 +4,6 @@ namespace EdgeSharp.Adapters;
 
 public interface IPartMetalDocument
 {
-    public abstract void Activate();
+    public void Activate();
     FlatPatternModels FlatPatternModels { get; }
 }

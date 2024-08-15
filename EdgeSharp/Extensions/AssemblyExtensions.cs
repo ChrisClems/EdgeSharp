@@ -62,6 +62,8 @@ public static class AssemblyExtensions
 
     /// <summary>
     /// Traverses the occurrences of an assembly document and performs an action on each occurrence using a delegate.
+    /// THIS APPEARS TO BREAK TOP-LEVEL ASSEMBLY CONTEXT FROM USING SUBASSEMBLY.THISASOCCURRENCE.
+    /// SETTING OCCURRENCE PROPERTIES USING THIS WILL NOT SET THEM AT THE TOP LEVEL CONTEXT.
     /// </summary>
     /// <param name="asm">The assembly document to traverse.</param>
     /// <param name="action">The action to perform on each occurrence.</param>
@@ -89,6 +91,8 @@ public static class AssemblyExtensions
     
     /// <summary>
     /// Traverses the occurrences of an assembly document and performs an action on each occurrence using a delegate.
+    /// THIS APPEARS TO BREAK TOP-LEVEL ASSEMBLY CONTEXT FROM USING SUBASSEMBLY.THISASOCCURRENCE.
+    /// SETTING OCCURRENCE PROPERTIES USING THIS WILL NOT SET THEM AT THE TOP LEVEL CONTEXT.
     /// </summary>
     /// <param name="asm">The assembly document to traverse.</param>
     /// <param name="actions">The actions to perform on each occurrence.</param>
