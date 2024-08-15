@@ -161,7 +161,14 @@ public static class AssemblyExtensions
             TraverseSubOccurrences(subSubOccurrence, actions);
         }
     }
-    
+
+    /// <summary>
+    /// Traverses the occurrences of an assembly document and performs an action on each occurrence and sub-occurrence using a delegate.
+    /// Maintains top-level assembly context for occurrence properties by using adapter interface for Occurrences and SubOcurrences.
+    /// </summary>
+    /// <param name="asm">The assembly document to traverse.</param>
+    /// <param name="action">The action to perform on occurrences.</param>
+    /// <param name="recursive">Optional. Indicates whether the traversal should be performed recursively in child assembly documents. Default is true.</param>
     public static void TraverseSubOccurrencesWithAction(this AssemblyDocument asm, Action<IOccurrenceEsx> action,
         bool recursive = true)
     {
@@ -185,6 +192,47 @@ public static class AssemblyExtensions
         }
     }
     
+    /// <summary>
+    /// Traverses the occurrences of an assembly document and performs an array of actions on each occurrence and sub-occurrence using a delegate.
+    /// Maintains top-level assembly context for occurrence properties by using adapter interface for Occurrences and SubOcurrences.
+    /// </summary>
+    /// <param name="asm">The assembly document to traverse.</param>
+    /// <param name="actions">The actions to perform on occurrences.</param>
+    /// <param name="recursive">Optional. Indicates whether the traversal should be performed recursively in child assembly documents. Default is true.</param>
+    public static void TraverseSubOccurrencesWithAction(this AssemblyDocument asm, Action<IOccurrenceEsx>[] actions,
+        bool recursive = true)
+    {
+        var occurrences = asm.Occurrences;
+        if (occurrences == null) return;
+        foreach (Occurrence occurrence in occurrences)
+        {
+            IOccurrenceEsx occurrenceAdapter = new OccurrenceAdapter(occurrence);
+            foreach (var action in actions)
+            {
+                action(occurrenceAdapter);
+            }
+            if (!occurrenceAdapter.Subassembly) continue;
+            if (!recursive) continue;
+            var subOccurrences = occurrenceAdapter.SubOccurrences;
+            if (subOccurrences == null) continue;
+            foreach (SubOccurrence subOccurrence in subOccurrences)
+            {
+                IOccurrenceEsx subOccurrenceAdapter = new SubOccurrenceAdapter(subOccurrence);
+                foreach (var action in actions)
+                {
+                    action(subOccurrenceAdapter);
+                }
+                if (!subOccurrenceAdapter.Subassembly) continue;
+                TraverseIOccurrenceEsx(subOccurrenceAdapter, actions);
+            }
+        }
+    }
+
+    /// <summary>
+    /// Traverses a sub-occurrence and performs an action on Solid Edge documents using a delegate.
+    /// </summary>
+    /// <param name="subOccurrence">The sub-occurrence to traverse.</param>
+    /// <param name="action">The action to perform on Solid Edge documents.</param>
     private static void TraverseIOccurrenceEsx(IOccurrenceEsx subOccurrence, Action<IOccurrenceEsx> action)
     {
         var subOccurrences = subOccurrence.SubOccurrences;
@@ -195,6 +243,27 @@ public static class AssemblyExtensions
             action(subOccurrenceAdapter);
             if (!subOccurrenceAdapter.Subassembly) continue;
             TraverseIOccurrenceEsx(subOccurrenceAdapter, action);
+        }
+    }
+    
+    /// <summary>
+    /// Traverses a sub-occurrence and performs an array of actions on Solid Edge documents using delegates.
+    /// </summary>
+    /// <param name="subOccurrence">The sub-occurrence to traverse.</param>
+    /// <param name="actions">The actions to perform on Solid Edge documents.</param>
+    private static void TraverseIOccurrenceEsx(IOccurrenceEsx subOccurrence, Action<IOccurrenceEsx>[] actions)
+    {
+        var subOccurrences = subOccurrence.SubOccurrences;
+        if (subOccurrences == null) return;
+        foreach (SubOccurrence subSubOccurrence in subOccurrences)
+        {
+            IOccurrenceEsx subOccurrenceAdapter = new SubOccurrenceAdapter(subSubOccurrence);
+            foreach (var action in actions)
+            {
+                action(subOccurrenceAdapter);
+            }
+            if (!subOccurrenceAdapter.Subassembly) continue;
+            TraverseIOccurrenceEsx(subOccurrenceAdapter, actions);
         }
     }
 
