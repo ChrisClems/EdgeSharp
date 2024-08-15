@@ -5,138 +5,11 @@ namespace EdgeSharp.Adapters;
 
 public class SubOccurrenceAdapter : IOccurrenceEsx
 {
-    private SubOccurrence _subOccurrence;
+    private readonly SubOccurrence _subOccurrence;
 
     public SubOccurrenceAdapter(SubOccurrence subOccurrence)
     {
         _subOccurrence = subOccurrence;
-    }
-
-    public void GetReferenceKey(ref Array ReferenceKey, out object KeySize)
-    {
-        _subOccurrence.GetReferenceKey(ref ReferenceKey, out KeySize);
-    }
-
-    public void GetMatrix(ref Array Matrix)
-    {
-        _subOccurrence.GetMatrix(ref Matrix);
-    }
-
-    public void CreateTopologyReference(ref Array ReferenceKey, out TopologyReference TopologyReference)
-    {
-        _subOccurrence.CreateTopologyReference(ref ReferenceKey, out TopologyReference);
-    }
-
-    public void GetMaterial(ref Array DiffuseColor, ref Array AmbientColor, ref Array SpecularColor, ref Array EmissionColor,
-        out double Shininess, out double Opacity)
-    {
-        _subOccurrence.GetMaterial(ref DiffuseColor, ref AmbientColor, ref SpecularColor, ref EmissionColor, out Shininess, out Opacity);
-    }
-
-    public void PutMatrix(ref Array Matrix, bool Replace)
-    {
-        _subOccurrence.PutMatrix(ref Matrix, Replace);
-    }
-
-    public void GetSimplifiedBodies(out int NumBodies, ref Array SimplifiedBodies)
-    {
-        _subOccurrence.GetSimplifiedBodies(out NumBodies, ref SimplifiedBodies);
-    }
-
-    public void GetBodyInversionMatrix(ref Array InvMatrix)
-    {
-        _subOccurrence.GetBodyInversionMatrix(ref InvMatrix);
-    }
-
-    public AdjustablePart MakeAdjustablePart()
-    {
-        return _subOccurrence.MakeAdjustablePart();
-    }
-
-    public AdjustablePart GetAdjustablePart()
-    {
-        return _subOccurrence.GetAdjustablePart();
-    }
-
-    public void GetExplodeMatrix(ref Array Matrix)
-    {
-        _subOccurrence.GetExplodeMatrix(ref Matrix);
-    }
-
-    public void RemoveOverrideBody()
-    {
-        _subOccurrence.RemoveOverrideBody();
-    }
-
-    public void GetRangeBox(ref Array MinRangePoint, ref Array MaxRangePoint)
-    {
-        _subOccurrence.GetRangeBox(ref MinRangePoint, ref MaxRangePoint);
-    }
-
-    public void GetInterpartDrivingOccurrences(out int NumDrivingOccurrences, ref Array DrivingOccurrences)
-    {
-        _subOccurrence.GetInterpartDrivingOccurrences(out NumDrivingOccurrences, ref DrivingOccurrences);
-    }
-
-    public void GetInterpartDrivenOccurrences(out int NumDrivenOccurrences, ref Array DrivenOccurrences)
-    {
-        _subOccurrence.GetInterpartDrivenOccurrences(out NumDrivenOccurrences, ref DrivenOccurrences);
-    }
-
-    public void CreateTopologyReferenceToBodyOverride(ref Array ReferenceKey, out TopologyReference TopologyReference)
-    {
-        _subOccurrence.CreateTopologyReferenceToBodyOverride(ref ReferenceKey, out TopologyReference);
-    }
-
-    public void Range(out double x_min, out double y_min, out double z_min, out double x_max, out double y_max, out double z_max)
-    {
-        _subOccurrence.Range(out x_min, out y_min, out z_min, out x_max, out y_max, out z_max);
-    }
-
-    public bool FileMissing()
-    {
-        return _subOccurrence.FileMissing();
-    }
-
-    public bool RecheckMissingFile()
-    {
-        return _subOccurrence.RecheckMissingFile();
-    }
-
-    public object GetFaceStyle2(bool vbHonourPrefs)
-    {
-        return _subOccurrence.GetFaceStyle2(vbHonourPrefs);
-    }
-
-    public void PutStyleUsePartStyle()
-    {
-        _subOccurrence.PutStyleUsePartStyle();
-    }
-
-    public void PutStyleNone()
-    {
-        _subOccurrence.PutStyleNone();
-    }
-
-    public bool GetStyleNone()
-    {
-        return _subOccurrence.GetStyleNone();
-    }
-
-    public bool GetStyleUsePartStyle()
-    {
-        return _subOccurrence.GetStyleUsePartStyle();
-    }
-
-    public object BindKeyToTopology(bool BodyOverride, ref Array ReferenceKey)
-    {
-        return _subOccurrence.BindKeyToTopology(BodyOverride, ref ReferenceKey);
-    }
-
-    public void GetSectionedFacetData(int PartID, out OccurrenceSectionedFacetDataConstants FacetDataPresence, out int FacetCount,
-        ref Array Points, ref Array Normals, ref Array TextureCoords, ref Array StyleIDs, ref Array FaceIDs)
-    {
-        _subOccurrence.GetSectionedFacetData(PartID, out FacetDataPresence, out FacetCount, ref Points, ref Normals, ref TextureCoords, ref StyleIDs, ref FaceIDs);
     }
 
     public Application Application => _subOccurrence.Application;
@@ -149,13 +22,7 @@ public class SubOccurrenceAdapter : IOccurrenceEsx
 
     public string SubOccurrenceFileName => _subOccurrence.SubOccurrenceFileName;
 
-    public SubOccurrences SubOccurrences => _subOccurrence.SubOccurrences;
-
-    public bool Subassembly => _subOccurrence.Subassembly;
-
     public ObjectType Type => _subOccurrence.Type;
-
-    public string Name => _subOccurrence.Name;
 
     public bool Visible
     {
@@ -346,7 +213,13 @@ public class SubOccurrenceAdapter : IOccurrenceEsx
     public bool IsInternalComponent => _subOccurrence.IsInternalComponent;
 
     public InternalComponent InternalComponent => _subOccurrence.InternalComponent;
-    
+
+    public SubOccurrences SubOccurrences => _subOccurrence.SubOccurrences;
+
+    public bool Subassembly => _subOccurrence.Subassembly;
+
+    public string Name => _subOccurrence.Name;
+
     public void SetCustomPropertyValue(string customPropertyName, string value)
     {
         _subOccurrence.CustomPropertyValue[customPropertyName] = value;
@@ -355,5 +228,137 @@ public class SubOccurrenceAdapter : IOccurrenceEsx
     public string GetCustomPropertyValue(string customPropertyName)
     {
         return _subOccurrence.CustomPropertyValue[customPropertyName];
+    }
+
+    public void GetReferenceKey(ref Array ReferenceKey, out object KeySize)
+    {
+        _subOccurrence.GetReferenceKey(ref ReferenceKey, out KeySize);
+    }
+
+    public void GetMatrix(ref Array Matrix)
+    {
+        _subOccurrence.GetMatrix(ref Matrix);
+    }
+
+    public void CreateTopologyReference(ref Array ReferenceKey, out TopologyReference TopologyReference)
+    {
+        _subOccurrence.CreateTopologyReference(ref ReferenceKey, out TopologyReference);
+    }
+
+    public void GetMaterial(ref Array DiffuseColor, ref Array AmbientColor, ref Array SpecularColor,
+        ref Array EmissionColor,
+        out double Shininess, out double Opacity)
+    {
+        _subOccurrence.GetMaterial(ref DiffuseColor, ref AmbientColor, ref SpecularColor, ref EmissionColor,
+            out Shininess, out Opacity);
+    }
+
+    public void PutMatrix(ref Array Matrix, bool Replace)
+    {
+        _subOccurrence.PutMatrix(ref Matrix, Replace);
+    }
+
+    public void GetSimplifiedBodies(out int NumBodies, ref Array SimplifiedBodies)
+    {
+        _subOccurrence.GetSimplifiedBodies(out NumBodies, ref SimplifiedBodies);
+    }
+
+    public void GetBodyInversionMatrix(ref Array InvMatrix)
+    {
+        _subOccurrence.GetBodyInversionMatrix(ref InvMatrix);
+    }
+
+    public AdjustablePart MakeAdjustablePart()
+    {
+        return _subOccurrence.MakeAdjustablePart();
+    }
+
+    public AdjustablePart GetAdjustablePart()
+    {
+        return _subOccurrence.GetAdjustablePart();
+    }
+
+    public void GetExplodeMatrix(ref Array Matrix)
+    {
+        _subOccurrence.GetExplodeMatrix(ref Matrix);
+    }
+
+    public void RemoveOverrideBody()
+    {
+        _subOccurrence.RemoveOverrideBody();
+    }
+
+    public void GetRangeBox(ref Array MinRangePoint, ref Array MaxRangePoint)
+    {
+        _subOccurrence.GetRangeBox(ref MinRangePoint, ref MaxRangePoint);
+    }
+
+    public void GetInterpartDrivingOccurrences(out int NumDrivingOccurrences, ref Array DrivingOccurrences)
+    {
+        _subOccurrence.GetInterpartDrivingOccurrences(out NumDrivingOccurrences, ref DrivingOccurrences);
+    }
+
+    public void GetInterpartDrivenOccurrences(out int NumDrivenOccurrences, ref Array DrivenOccurrences)
+    {
+        _subOccurrence.GetInterpartDrivenOccurrences(out NumDrivenOccurrences, ref DrivenOccurrences);
+    }
+
+    public void CreateTopologyReferenceToBodyOverride(ref Array ReferenceKey, out TopologyReference TopologyReference)
+    {
+        _subOccurrence.CreateTopologyReferenceToBodyOverride(ref ReferenceKey, out TopologyReference);
+    }
+
+    public void Range(out double x_min, out double y_min, out double z_min, out double x_max, out double y_max,
+        out double z_max)
+    {
+        _subOccurrence.Range(out x_min, out y_min, out z_min, out x_max, out y_max, out z_max);
+    }
+
+    public bool FileMissing()
+    {
+        return _subOccurrence.FileMissing();
+    }
+
+    public bool RecheckMissingFile()
+    {
+        return _subOccurrence.RecheckMissingFile();
+    }
+
+    public object GetFaceStyle2(bool vbHonourPrefs)
+    {
+        return _subOccurrence.GetFaceStyle2(vbHonourPrefs);
+    }
+
+    public void PutStyleUsePartStyle()
+    {
+        _subOccurrence.PutStyleUsePartStyle();
+    }
+
+    public void PutStyleNone()
+    {
+        _subOccurrence.PutStyleNone();
+    }
+
+    public bool GetStyleNone()
+    {
+        return _subOccurrence.GetStyleNone();
+    }
+
+    public bool GetStyleUsePartStyle()
+    {
+        return _subOccurrence.GetStyleUsePartStyle();
+    }
+
+    public object BindKeyToTopology(bool BodyOverride, ref Array ReferenceKey)
+    {
+        return _subOccurrence.BindKeyToTopology(BodyOverride, ref ReferenceKey);
+    }
+
+    public void GetSectionedFacetData(int PartID, out OccurrenceSectionedFacetDataConstants FacetDataPresence,
+        out int FacetCount,
+        ref Array Points, ref Array Normals, ref Array TextureCoords, ref Array StyleIDs, ref Array FaceIDs)
+    {
+        _subOccurrence.GetSectionedFacetData(PartID, out FacetDataPresence, out FacetCount, ref Points, ref Normals,
+            ref TextureCoords, ref StyleIDs, ref FaceIDs);
     }
 }
