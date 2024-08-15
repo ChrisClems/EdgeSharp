@@ -1,4 +1,5 @@
 ﻿using SolidEdgeAssembly;
+using SolidEdgePart;
 
 namespace EdgeSharp;
 
@@ -17,6 +18,7 @@ public class Coordinate
 public class StructuralFrameSection
 {
     public int SectionId { get; private set; }
+    public StructuralFrame Parent;
     public Occurrence SectionOccurrence;
     public int OccurrenceId = 0;
     public double EndAngle1 = 0;
@@ -30,6 +32,7 @@ public class StructuralFrameSection
 
     internal StructuralFrameSection(StructuralFrame frame, int sectionId)
     {
+        Parent = frame;
         SectionId = sectionId;
         Offset = new Coordinate();
         Rotation = new Coordinate();
@@ -55,5 +58,10 @@ public class StructuralFrameSection
         frame.SegmentCutLength(SectionId, out Length, out _);
         frame.EndFaceEndAngle(SectionId, out EndAngle1, out EndAngle2);
         frame.SideFaceEndAngle(SectionId, out SideAngle1, out SideAngle2);
+    }
+
+    public PartDocument GetPartDocument()
+    {
+        return (PartDocument)SectionOccurrence.PartDocument;
     }
 }
