@@ -74,7 +74,7 @@ var propertySetDict = backgroundDoc.PropertySetsToDictionary();
 
 Future functionality on the roadmap:
 
-* Adapter interface to consolidate common members of PartDocument and SheetMetalDocument types so that it's easier to iterate over assemblies containing both.
+* Adapter interfaces to consolidate common members on similar types. e.g. PartDocument/SheetMetalDocument and Occurrence/SubOcurrence.
 * Offline (Solid Edge not running) property reading and writing
 * Ini file management for export settings config
 * Proper documentation generation
@@ -83,4 +83,4 @@ Future functionality on the roadmap:
 
 Build [Interop.SolidEdge](https://github.com/ChrisClems/Interop.SolidEdge) (That README update is an old placeholder, ignore it) using a machine with Solid Edge installed. Reference the Interop.SolidEdge.dll produced by that project in your EdgeSharp project. That should satisfy the dependencies of EdgeSharp.
 
-Future versions will better integrate the interop library into the EdgeSharp build process.
+Future versions aim to better integrate the interop library into the EdgeSharp build process.
