@@ -8,63 +8,63 @@ namespace EdgeSharp.Extensions;
 [SuppressMessage("ReSharper", "SuspiciousTypeConversion.Global")]
 public static class AssemblyExtensions
 {
-    /// <summary>
-    /// Traverses an assembly document and performs an action on Solid Edge documents using a delegate.
-    /// </summary>
-    /// <param name="asm">The assembly document to traverse.</param>
-    /// <param name="action">The action to perform on Solid Edge documents.</param>
-    /// <param name="recursive">Optional. Indicates whether the traversal should be performed recursively in child assembly documents. Default is true.</param>
-    public static void TraverseAssemblyWithAction(this AssemblyDocument asm, Action<SolidEdgeDocument> action, bool recursive = true)
-    {
-        var occurrences = asm.Occurrences;
-        foreach (Occurrence occurrence in occurrences)
-        {
-            var isAsm = false;
-            var document = (SolidEdgeDocument)occurrence.OccurrenceDocument;
-
-            if (document.Type == DocumentTypeConstants.igAssemblyDocument)
-            {
-                isAsm = true;
-            }
-
-            action(document);
-
-            if (!recursive || !isAsm) continue;
-            var asmDoc = (AssemblyDocument)document;
-            asmDoc.TraverseAssemblyWithAction(action, recursive);
-        }
-    }
-
-    /// <summary>
-    /// Traverses an assembly document and performs an action on Solid Edge documents using a delegate.
-    /// </summary>
-    /// <param name="asm">The assembly document to traverse.</param>
-    /// <param name="actions">The actions to perform on Solid Edge documents.</param>
-    /// <param name="recursive">Optional. Indicates whether the traversal should be performed recursively in child assembly documents. Default is true.</param>
-    public static void TraverseAssemblyWithAction(this AssemblyDocument asm, Action<SolidEdgeDocument>[] actions, bool recursive = true)
-    {
-        var occurrences = asm.Occurrences;
-        foreach (Occurrence occurrence in occurrences)
-        {
-            var document = (SolidEdgeDocument)occurrence.OccurrenceDocument;
-
-            foreach (var action in actions)
-            {
-                action(document);
-            }
-
-            if (recursive && document.Type == DocumentTypeConstants.igAssemblyDocument)
-            {
-                var asmDoc = (AssemblyDocument)document;
-                asmDoc.TraverseAssemblyWithAction(actions, recursive);
-            }
-        }
-    }
+    // Removing to test TraverseOccurrencesWithAction as a replacement.
+    // /// <summary>
+    // /// Traverses an assembly document and performs an action on Solid Edge documents using a delegate.
+    // /// </summary>
+    // /// <param name="asm">The assembly document to traverse.</param>
+    // /// <param name="action">The action to perform on Solid Edge documents.</param>
+    // /// <param name="recursive">Optional. Indicates whether the traversal should be performed recursively in child assembly documents. Default is true.</param>
+    // public static void TraverseAssemblyWithAction(this AssemblyDocument asm, Action<SolidEdgeDocument> action, bool recursive = true)
+    // {
+    //     var occurrences = asm.Occurrences;
+    //     foreach (Occurrence occurrence in occurrences)
+    //     {
+    //         var isAsm = false;
+    //         var document = (SolidEdgeDocument)occurrence.OccurrenceDocument;
+    //
+    //         if (document.Type == DocumentTypeConstants.igAssemblyDocument)
+    //         {
+    //             isAsm = true;
+    //         }
+    //
+    //         action(document);
+    //
+    //         if (!recursive || !isAsm) continue;
+    //         var asmDoc = (AssemblyDocument)document;
+    //         asmDoc.TraverseAssemblyWithAction(action, recursive);
+    //     }
+    // }
+    //
+    // /// <summary>
+    // /// Traverses an assembly document and performs an action on Solid Edge documents using a delegate.
+    // /// </summary>
+    // /// <param name="asm">The assembly document to traverse.</param>
+    // /// <param name="actions">The actions to perform on Solid Edge documents.</param>
+    // /// <param name="recursive">Optional. Indicates whether the traversal should be performed recursively in child assembly documents. Default is true.</param>
+    // public static void TraverseAssemblyWithAction(this AssemblyDocument asm, Action<SolidEdgeDocument>[] actions, bool recursive = true)
+    // {
+    //     var occurrences = asm.Occurrences;
+    //     foreach (Occurrence occurrence in occurrences)
+    //     {
+    //         var document = (SolidEdgeDocument)occurrence.OccurrenceDocument;
+    //
+    //         foreach (var action in actions)
+    //         {
+    //             action(document);
+    //         }
+    //
+    //         if (recursive && document.Type == DocumentTypeConstants.igAssemblyDocument)
+    //         {
+    //             var asmDoc = (AssemblyDocument)document;
+    //             asmDoc.TraverseAssemblyWithAction(actions, recursive);
+    //         }
+    //     }
+    // }
 
     /// <summary>
     /// Traverses the occurrences of an assembly document and performs an action on each occurrence using a delegate.
-    /// THIS APPEARS TO BREAK TOP-LEVEL ASSEMBLY CONTEXT FROM USING SUBASSEMBLY.THISASOCCURRENCE.
-    /// SETTING OCCURRENCE PROPERTIES USING THIS WILL NOT SET THEM AT THE TOP LEVEL CONTEXT.
+    /// Breaks top-level assembly context by retrieving Occurrence from SucOccurrence.ThisAsOccurrence
     /// </summary>
     /// <param name="asm">The assembly document to traverse.</param>
     /// <param name="action">The action to perform on each occurrence.</param>
@@ -92,8 +92,7 @@ public static class AssemblyExtensions
     
     /// <summary>
     /// Traverses the occurrences of an assembly document and performs an action on each occurrence using a delegate.
-    /// THIS APPEARS TO BREAK TOP-LEVEL ASSEMBLY CONTEXT FROM USING SUBASSEMBLY.THISASOCCURRENCE.
-    /// SETTING OCCURRENCE PROPERTIES USING THIS WILL NOT SET THEM AT THE TOP LEVEL CONTEXT.
+    /// Breaks top-level assembly context by retrieving Occurrence from SucOccurrence.ThisAsOccurrence
     /// </summary>
     /// <param name="asm">The assembly document to traverse.</param>
     /// <param name="actions">The actions to perform on each occurrence.</param>
@@ -143,7 +142,7 @@ public static class AssemblyExtensions
     }
     
     /// <summary>
-    /// Recursively traverses SubOccurrences of a SubOccurrence SubAssembly and performs the delegate action
+    /// Recursively traverses SubOccurrences of a SubOccurrence SubAssembly and performs the delegate actions
     /// </summary>
     /// <param name="subOccurrence">The sub-occurrence to start traversal from.</param>
     /// <param name="actions">The actions to perform on Solid Edge occurrences.</param>
@@ -169,7 +168,7 @@ public static class AssemblyExtensions
     /// <param name="asm">The assembly document to traverse.</param>
     /// <param name="action">The action to perform on occurrences.</param>
     /// <param name="recursive">Optional. Indicates whether the traversal should be performed recursively in child assembly documents. Default is true.</param>
-    public static void TraverseSubOccurrencesWithAction(this AssemblyDocument asm, Action<IOccurrenceEsx> action,
+    public static void TraverseOccurrencesWithAction(this AssemblyDocument asm, Action<IOccurrenceEsx> action,
         bool recursive = true)
     {
         var occurrences = asm.Occurrences;
@@ -199,7 +198,7 @@ public static class AssemblyExtensions
     /// <param name="asm">The assembly document to traverse.</param>
     /// <param name="actions">The actions to perform on occurrences.</param>
     /// <param name="recursive">Optional. Indicates whether the traversal should be performed recursively in child assembly documents. Default is true.</param>
-    public static void TraverseSubOccurrencesWithAction(this AssemblyDocument asm, Action<IOccurrenceEsx>[] actions,
+    public static void TraverseOccurrencesWithAction(this AssemblyDocument asm, Action<IOccurrenceEsx>[] actions,
         bool recursive = true)
     {
         var occurrences = asm.Occurrences;
