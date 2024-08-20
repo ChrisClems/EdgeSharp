@@ -8,7 +8,7 @@ using SolidEdgePart;
 
 namespace EdgeSharp.Adapters;
 
-public class PartDocumentAdapter : IPartMetalDocument
+public class PartDocumentAdapter : IPartDocumentEsx
 {
     private readonly PartDocument _partDocument;
 
@@ -16,6 +16,18 @@ public class PartDocumentAdapter : IPartMetalDocument
     {
         _partDocument = partDocument;
     }
+
+    public Sensors Sensors => _partDocument.Sensors;
+
+    public bool ShowCurvatureCombs
+    {
+        get => _partDocument.ShowCurvatureCombs;
+        set => _partDocument.ShowCurvatureCombs = value;
+    }
+
+    public LabelWeldDataCollection LabelWeldDataCollection => _partDocument.LabelWeldDataCollection;
+
+    public GenerativeStudies GenerativeStudies => _partDocument.GenerativeStudies;
 
     public Application Application => _partDocument.Application;
 
@@ -141,8 +153,6 @@ public class PartDocumentAdapter : IPartMetalDocument
 
     public object DividePartEvents => _partDocument.DividePartEvents;
 
-    public Sensors Sensors => _partDocument.Sensors;
-
     public bool BodyCheck
     {
         get => _partDocument.BodyCheck;
@@ -159,12 +169,6 @@ public class PartDocumentAdapter : IPartMetalDocument
     {
         get => _partDocument.DesignBodyVisible;
         set => _partDocument.DesignBodyVisible = value;
-    }
-
-    public bool ShowCurvatureCombs
-    {
-        get => _partDocument.ShowCurvatureCombs;
-        set => _partDocument.ShowCurvatureCombs = value;
     }
 
     public int GeometricVersion => _partDocument.GeometricVersion;
@@ -245,8 +249,6 @@ public class PartDocumentAdapter : IPartMetalDocument
 
     public Sketches3D Sketches3D => _partDocument.Sketches3D;
 
-    public LabelWeldDataCollection LabelWeldDataCollection => _partDocument.LabelWeldDataCollection;
-
     public int CutawaysCount => _partDocument.CutawaysCount;
 
     public SketchBlocks Blocks => _partDocument.Blocks;
@@ -272,8 +274,6 @@ public class PartDocumentAdapter : IPartMetalDocument
     public bool IsFamilyOfPartsMaster => _partDocument.IsFamilyOfPartsMaster;
 
     public bool IsFamilyOfPartsMember => _partDocument.IsFamilyOfPartsMember;
-
-    public GenerativeStudies GenerativeStudies => _partDocument.GenerativeStudies;
 
     public SteeringWheel SteeringWheel => _partDocument.SteeringWheel;
 
@@ -320,9 +320,9 @@ public class PartDocumentAdapter : IPartMetalDocument
             CreateBackup, UpdateLinkInContainer, UpdateAllLinksInContainer);
     }
 
-    public void SaveCopyAs(string Name)
+    public void SaveCopyAs(string NewCopyName)
     {
-        _partDocument.SaveCopyAs(Name);
+        _partDocument.SaveCopyAs(NewCopyName);
     }
 
     public void SaveAsJT(string NewName, object Include_PreciseGeom = null, object Prod_Structure_Option = null,
@@ -467,16 +467,6 @@ public class PartDocumentAdapter : IPartMetalDocument
         _partDocument.Redo(NumTransactions);
     }
 
-    public void GetGlobalParameter(PartGlobalConstants Parameter, out object Value)
-    {
-        _partDocument.GetGlobalParameter(Parameter, out Value);
-    }
-
-    public void SetGlobalParameter(PartGlobalConstants Parameter, object Value)
-    {
-        _partDocument.SetGlobalParameter(Parameter, Value);
-    }
-
     public void MeasureAngle(object Element1, object Element2, out double TrueAngle, out double ApparentAngle,
         object Element3 = null)
     {
@@ -554,11 +544,11 @@ public class PartDocumentAdapter : IPartMetalDocument
         _partDocument.ShowOnly(NumObjects, Objects);
     }
 
-    public MeasureVariable AddMeasureVariable(MeasureVariableTypeConstants Type,
+    public MeasureVariable AddMeasureVariable(MeasureVariableTypeConstants variableType,
         MeasureVariableValueConstants ValueType,
         object Geom1, object Geom2, object Geom3 = null)
     {
-        return _partDocument.AddMeasureVariable(Type, ValueType, Geom1, Geom2, Geom3);
+        return _partDocument.AddMeasureVariable(variableType, ValueType, Geom1, Geom2, Geom3);
     }
 
     public void GetCapturedRelationshipInformation(out Array RelationshipTypes, out Array OffsetTypes,
@@ -640,15 +630,6 @@ public class PartDocumentAdapter : IPartMetalDocument
         _partDocument.Break(NumberOfFeatures, ref Features);
     }
 
-    public void MoveToSynchronous(object pFeatureUnk, bool bIgnoreWarnings, bool bExtendSelection,
-        out int NumberOfFeaturesCausingError, out Array ErrorMessageArray, out int NumberOfFeaturesCausingWarning,
-        out Array WarningMessageArray, out double VolumeDifference)
-    {
-        _partDocument.MoveToSynchronous(pFeatureUnk, bIgnoreWarnings, bExtendSelection,
-            out NumberOfFeaturesCausingError, out ErrorMessageArray, out NumberOfFeaturesCausingWarning,
-            out WarningMessageArray, out VolumeDifference);
-    }
-
     public void GetContainerDocumentAndOccurrenceOfIPADoc(out object ContainerDocument, out object IPAOccurrence)
     {
         _partDocument.GetContainerDocumentAndOccurrenceOfIPADoc(out ContainerDocument, out IPAOccurrence);
@@ -704,31 +685,6 @@ public class PartDocumentAdapter : IPartMetalDocument
     public void SaveMultiBodyPublish(bool CreateAssemblyIfNeeded)
     {
         _partDocument.SaveMultiBodyPublish(CreateAssemblyIfNeeded);
-    }
-
-    public void GetRayIntersections(ref Array Bodies, ref Array Origins, ref Array Directions, int NumRays,
-        double Radius,
-        double Offset, out int NumIntersections, ref Array BodyIndex, ref Array IntersectionPoints,
-        ref Array IntersectionNormals, ref Array RayIndex, ref Array Entity, out object Type)
-    {
-        _partDocument.GetRayIntersections(ref Bodies, ref Origins, ref Directions, NumRays, Radius, Offset,
-            out NumIntersections, ref BodyIndex, ref IntersectionPoints, ref IntersectionNormals, ref RayIndex,
-            ref Entity, out Type);
-    }
-
-    public void SetFrameDefineOriginAndOrientation(object pOrientationLine, object pOriginPoint)
-    {
-        _partDocument.SetFrameDefineOriginAndOrientation(pOrientationLine, pOriginPoint);
-    }
-
-    public void GetFrameDefineOriginAndOrientation(out object ppOrientationLine, out object ppOriginPoint)
-    {
-        _partDocument.GetFrameDefineOriginAndOrientation(out ppOrientationLine, out ppOriginPoint);
-    }
-
-    public void DeleteFrameDefineOriginAndOrientation()
-    {
-        _partDocument.DeleteFrameDefineOriginAndOrientation();
     }
 
     public void ActivateReflectivePlane()
@@ -813,13 +769,57 @@ public class PartDocumentAdapter : IPartMetalDocument
         _partDocument.LoadUOMPreferences(UpdateUomGlobals);
     }
 
-    public void CopytoPMI(object featureObj, seCopytoPMIConstants Type)
+    public void CopytoPMI(object featureObj, seCopytoPMIConstants PMIType)
     {
-        _partDocument.CopytoPMI(featureObj, Type);
+        _partDocument.CopytoPMI(featureObj, PMIType);
     }
 
-    public object get_AddInsStorage(string Name, int grfMode)
+    public object get_AddInsStorage(string StorageName, int grfMode)
     {
-        return _partDocument.get_AddInsStorage(Name, grfMode);
+        return _partDocument.get_AddInsStorage(StorageName, grfMode);
+    }
+
+    public void GetGlobalParameter(PartGlobalConstants Parameter, out object Value)
+    {
+        _partDocument.GetGlobalParameter(Parameter, out Value);
+    }
+
+    public void SetGlobalParameter(PartGlobalConstants Parameter, object Value)
+    {
+        _partDocument.SetGlobalParameter(Parameter, Value);
+    }
+
+    public void MoveToSynchronous(object pFeatureUnk, bool bIgnoreWarnings, bool bExtendSelection,
+        out int NumberOfFeaturesCausingError, out Array ErrorMessageArray, out int NumberOfFeaturesCausingWarning,
+        out Array WarningMessageArray, out double VolumeDifference)
+    {
+        _partDocument.MoveToSynchronous(pFeatureUnk, bIgnoreWarnings, bExtendSelection,
+            out NumberOfFeaturesCausingError, out ErrorMessageArray, out NumberOfFeaturesCausingWarning,
+            out WarningMessageArray, out VolumeDifference);
+    }
+
+    public void GetRayIntersections(ref Array Bodies, ref Array Origins, ref Array Directions, int NumRays,
+        double Radius,
+        double Offset, out int NumIntersections, ref Array BodyIndex, ref Array IntersectionPoints,
+        ref Array IntersectionNormals, ref Array RayIndex, ref Array Entity, out object Type)
+    {
+        _partDocument.GetRayIntersections(ref Bodies, ref Origins, ref Directions, NumRays, Radius, Offset,
+            out NumIntersections, ref BodyIndex, ref IntersectionPoints, ref IntersectionNormals, ref RayIndex,
+            ref Entity, out Type);
+    }
+
+    public void SetFrameDefineOriginAndOrientation(object pOrientationLine, object pOriginPoint)
+    {
+        _partDocument.SetFrameDefineOriginAndOrientation(pOrientationLine, pOriginPoint);
+    }
+
+    public void GetFrameDefineOriginAndOrientation(out object ppOrientationLine, out object ppOriginPoint)
+    {
+        _partDocument.GetFrameDefineOriginAndOrientation(out ppOrientationLine, out ppOriginPoint);
+    }
+
+    public void DeleteFrameDefineOriginAndOrientation()
+    {
+        _partDocument.DeleteFrameDefineOriginAndOrientation();
     }
 }

@@ -8,27 +8,27 @@ public class Coordinate
     public double X { get; set; }
     public double Y { get; set; }
     public double Z { get; set; }
-    
 }
 
 /// <summary>
-/// Represents a structural frame section.
-/// A custom type to organize structural frame section/segment properties.
+///     Represents a structural frame section.
+///     A custom type to organize structural frame section/segment properties.
 /// </summary>
 public class StructuralFrameSection
 {
-    public int SectionId { get; private set; }
-    public StructuralFrame Parent;
-    public Occurrence SectionOccurrence;
-    public int OccurrenceId = 0;
-    public double EndAngle1 = 0;
-    public double EndAngle2 = 0;
-    public double SideAngle1 = 0;
-    public double SideAngle2 = 0;
-    public double Length = 0;
+    public double EndAngle1;
+    public double EndAngle2;
+    public double Length;
+
+    public int OccurrenceId;
+
     //public static double ExactLength = 0;
     public Coordinate Offset;
+    public StructuralFrame Parent;
     public Coordinate Rotation;
+    public Occurrence SectionOccurrence;
+    public double SideAngle1;
+    public double SideAngle2;
 
     internal StructuralFrameSection(StructuralFrame frame, int sectionId)
     {
@@ -47,18 +47,21 @@ public class StructuralFrameSection
         frame.ReturnOccurrenceForGivenSectionID(SectionId, out objOccurenceId, out objOccurrence);
         SectionOccurrence = (Occurrence)objOccurrence;
         OccurrenceId = (int)objOccurenceId;
-        frame.GetPlaneOrientationForGivenSectionID(SectionId, out xOffsetObj, out yOffsetObj, out zOffsetObj, out xRotationObj, out yRotationObj, out zRotationObj);
+        frame.GetPlaneOrientationForGivenSectionID(SectionId, out xOffsetObj, out yOffsetObj, out zOffsetObj,
+            out xRotationObj, out yRotationObj, out zRotationObj);
         Offset.X = (double)xOffsetObj;
         Offset.Y = (double)yOffsetObj;
         Offset.Z = (double)zOffsetObj;
         Rotation.X = (double)xRotationObj;
         Rotation.Y = (double)yRotationObj;
         Rotation.Z = (double)zRotationObj;
-        
+
         frame.SegmentCutLength(SectionId, out Length, out _);
         frame.EndFaceEndAngle(SectionId, out EndAngle1, out EndAngle2);
         frame.SideFaceEndAngle(SectionId, out SideAngle1, out SideAngle2);
     }
+
+    public int SectionId { get; }
 
     public PartDocument GetPartDocument()
     {

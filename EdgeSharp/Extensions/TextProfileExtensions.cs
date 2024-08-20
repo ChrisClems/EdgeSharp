@@ -6,7 +6,7 @@ namespace EdgeSharp.Extensions;
 public static class TextProfileExtensions
 {
     /// <summary>
-    /// Retries copying the text profile until it is successful or the specified number of retries has been reached.
+    ///     Retries copying the text profile until it is successful or the specified number of retries has been reached.
     /// </summary>
     /// <param name="textProfile">The text profile to copy.</param>
     /// <param name="retryCount">The number of times to retry copying the text profile. Set to -1 to retry indefinitely.</param>
@@ -15,7 +15,6 @@ public static class TextProfileExtensions
     {
         const uint CLIPBRD_E_CANT_OPEN = 0x800401D0;
         while (retryCount != 0)
-        {
             try
             {
                 textProfile.Copy();
@@ -24,17 +23,11 @@ public static class TextProfileExtensions
             catch (COMException ex)
             {
                 if ((uint)ex.ErrorCode != CLIPBRD_E_CANT_OPEN)
-                {
                     throw new Exception(
                         "Error copying text profile. Try opening and closing the text profile dialog in Solid Edge to fix and re-run.",
                         ex);
-                }
-                if (retryCount > 0)
-                {
-                    retryCount--;
-                }
+                if (retryCount > 0) retryCount--;
                 Thread.Sleep(retryDelay);
             }
-        }
     }
 }

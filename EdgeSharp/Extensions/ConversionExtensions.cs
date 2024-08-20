@@ -7,7 +7,7 @@ public static class ConversionExtensions
         const double conversionFactor = 0.0254;
         return inches * conversionFactor;
     }
-    
+
     public static double MetersToInches(this double meters)
     {
         const double conversionFactor = 39.37;
@@ -23,5 +23,4 @@ public static class ConversionExtensions
     {
         return radians * (180 / Math.PI);
     }
-    
 }

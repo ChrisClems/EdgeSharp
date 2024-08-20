@@ -8,11 +8,11 @@ using SolidEdgePart;
 
 namespace EdgeSharp.Adapters;
 
-public class SheetMetalDocumentAdapter : IPartMetalDocument
+public class SheetDocumentAdapter : IPartDocumentEsx
 {
     private readonly SheetMetalDocument _sheetMetalDocument;
 
-    public SheetMetalDocumentAdapter(SheetMetalDocument sheetMetalDocument)
+    public SheetDocumentAdapter(SheetMetalDocument sheetMetalDocument)
     {
         _sheetMetalDocument = sheetMetalDocument;
     }
@@ -308,9 +308,9 @@ public class SheetMetalDocumentAdapter : IPartMetalDocument
             CreateBackup, UpdateLinkInContainer, UpdateAllLinksInContainer);
     }
 
-    public void SaveCopyAs(string Name)
+    public void SaveCopyAs(string NewCopyName)
     {
-        _sheetMetalDocument.SaveCopyAs(Name);
+        _sheetMetalDocument.SaveCopyAs(NewCopyName);
     }
 
     public void SaveAsJT(string NewName, object Include_PreciseGeom = null, object Prod_Structure_Option = null,
@@ -457,16 +457,6 @@ public class SheetMetalDocumentAdapter : IPartMetalDocument
         _sheetMetalDocument.Redo(NumTransactions);
     }
 
-    public void GetGlobalParameter(SheetMetalGlobalConstants Parameter, out object Value)
-    {
-        _sheetMetalDocument.GetGlobalParameter(Parameter, out Value);
-    }
-
-    public void SetGlobalParameter(SheetMetalGlobalConstants Parameter, object Value)
-    {
-        _sheetMetalDocument.SetGlobalParameter(Parameter, Value);
-    }
-
     public void MeasureAngle(object Element1, object Element2, out double TrueAngle, out double ApparentAngle,
         object Element3 = null)
     {
@@ -546,11 +536,11 @@ public class SheetMetalDocumentAdapter : IPartMetalDocument
         _sheetMetalDocument.ShowOnly(NumObjects, Objects);
     }
 
-    public MeasureVariable AddMeasureVariable(MeasureVariableTypeConstants Type,
+    public MeasureVariable AddMeasureVariable(MeasureVariableTypeConstants VariableType,
         MeasureVariableValueConstants ValueType,
         object Geom1, object Geom2, object Geom3 = null)
     {
-        return _sheetMetalDocument.AddMeasureVariable(Type, ValueType, Geom1, Geom2, Geom3);
+        return _sheetMetalDocument.AddMeasureVariable(VariableType, ValueType, Geom1, Geom2, Geom3);
     }
 
     public void GetCapturedRelationshipInformation(out Array RelationshipTypes, out Array OffsetTypes,
@@ -615,15 +605,6 @@ public class SheetMetalDocumentAdapter : IPartMetalDocument
     public void Break(int NumberOfFeatures, ref Array Features)
     {
         _sheetMetalDocument.Break(NumberOfFeatures, ref Features);
-    }
-
-    public void MoveToSynchronous(object pFeatureUnk, bool bIgnoreWarnings, bool bExtendSelection,
-        out int NumberOfFeaturesCausingError, out Array ErrorMessageArray, out int NumberOfFeaturesCausingWarning,
-        out Array WarningMessageArray)
-    {
-        _sheetMetalDocument.MoveToSynchronous(pFeatureUnk, bIgnoreWarnings, bExtendSelection,
-            out NumberOfFeaturesCausingError, out ErrorMessageArray, out NumberOfFeaturesCausingWarning,
-            out WarningMessageArray);
     }
 
     public void DeleteEntities(ref Array EntitiesToDelete, out Array EntitiesNotDeleted)
@@ -781,6 +762,35 @@ public class SheetMetalDocumentAdapter : IPartMetalDocument
         _sheetMetalDocument.LoadUOMPreferences(UpdateUomGlobals);
     }
 
+    public void CopytoPMI(object featureObj, seCopytoPMIConstants PMIType)
+    {
+        _sheetMetalDocument.CopytoPMI(featureObj, PMIType);
+    }
+
+    public object get_AddInsStorage(string StorageName, int grfMode)
+    {
+        return _sheetMetalDocument.AddInsStorage[StorageName, grfMode];
+    }
+
+    public void GetGlobalParameter(SheetMetalGlobalConstants Parameter, out object Value)
+    {
+        _sheetMetalDocument.GetGlobalParameter(Parameter, out Value);
+    }
+
+    public void SetGlobalParameter(SheetMetalGlobalConstants Parameter, object Value)
+    {
+        _sheetMetalDocument.SetGlobalParameter(Parameter, Value);
+    }
+
+    public void MoveToSynchronous(object pFeatureUnk, bool bIgnoreWarnings, bool bExtendSelection,
+        out int NumberOfFeaturesCausingError, out Array ErrorMessageArray, out int NumberOfFeaturesCausingWarning,
+        out Array WarningMessageArray)
+    {
+        _sheetMetalDocument.MoveToSynchronous(pFeatureUnk, bIgnoreWarnings, bExtendSelection,
+            out NumberOfFeaturesCausingError, out ErrorMessageArray, out NumberOfFeaturesCausingWarning,
+            out WarningMessageArray);
+    }
+
     public void ExportDesignCostToCSV(string bstrSEFileName, string bstrCSVFileName, out bool bSuccessful)
     {
         _sheetMetalDocument.ExportDesignCostToCSV(bstrSEFileName, bstrCSVFileName, out bSuccessful);
@@ -789,15 +799,5 @@ public class SheetMetalDocumentAdapter : IPartMetalDocument
     public void GetDesignForCostInfo(string bstrSEFileName, out object pvarDesignForCostInfo)
     {
         _sheetMetalDocument.GetDesignForCostInfo(bstrSEFileName, out pvarDesignForCostInfo);
-    }
-
-    public void CopytoPMI(object featureObj, seCopytoPMIConstants Type)
-    {
-        _sheetMetalDocument.CopytoPMI(featureObj, Type);
-    }
-
-    public object get_AddInsStorage(string Name, int grfMode)
-    {
-        return _sheetMetalDocument.get_AddInsStorage(Name, grfMode);
     }
 }

@@ -1,6 +1,7 @@
 ﻿using SolidEdgeAssembly;
 using SolidEdgeFramework;
 using SolidEdgePart;
+// ReSharper disable InconsistentNaming
 
 namespace EdgeSharp.Adapters;
 
@@ -12,10 +13,6 @@ public class OccurrenceAdapter : IOccurrenceEsx
     {
         _occurrence = occurrence;
     }
-
-    public object Application => _occurrence.Application;
-
-    public object Parent => _occurrence.Parent;
 
     public int Index => _occurrence.Index;
 
@@ -29,24 +26,10 @@ public class OccurrenceAdapter : IOccurrenceEsx
         set => _occurrence.ReferenceOnly = value;
     }
 
-    public ObjectType Type => _occurrence.Type;
-
     public int Quantity
     {
         get => _occurrence.Quantity;
         set => _occurrence.Quantity = value;
-    }
-
-    public bool Visible
-    {
-        get => _occurrence.Visible;
-        set => _occurrence.Visible = value;
-    }
-
-    public bool Locatable
-    {
-        get => _occurrence.Locatable;
-        set => _occurrence.Locatable = value;
     }
 
     public OccurrenceStatusConstants Status => _occurrence.Status;
@@ -79,18 +62,6 @@ public class OccurrenceAdapter : IOccurrenceEsx
 
     public bool IsForeign => _occurrence.IsForeign;
 
-    public string Style
-    {
-        get => _occurrence.Style;
-        set => _occurrence.Style = value;
-    }
-
-    public object FaceStyle
-    {
-        get => _occurrence.FaceStyle;
-        set => _occurrence.FaceStyle = value;
-    }
-
     public object AttributeSets => _occurrence.AttributeSets;
 
     public string OccurrenceFileName => _occurrence.OccurrenceFileName;
@@ -102,8 +73,6 @@ public class OccurrenceAdapter : IOccurrenceEsx
         get => _occurrence.Activate;
         set => _occurrence.Activate = value;
     }
-
-    public AssemblyDocument TopLevelDocument => _occurrence.TopLevelDocument;
 
     public double NongraphicQuantity
     {
@@ -120,6 +89,68 @@ public class OccurrenceAdapter : IOccurrenceEsx
     public string NongraphicDescription => _occurrence.NongraphicDescription;
 
     public bool IsFamilyOfAssembly => _occurrence.IsFamilyOfAssembly;
+
+    public bool IncludeInInterference
+    {
+        get => _occurrence.IncludeInInterference;
+        set => _occurrence.IncludeInInterference = value;
+    }
+
+    public bool DisplayAsReference
+    {
+        get => _occurrence.DisplayAsReference;
+        set => _occurrence.DisplayAsReference = value;
+    }
+
+    public bool HasUserDefinedName => _occurrence.HasUserDefinedName;
+
+    public bool IsStructuralFrameItem => _occurrence.IsStructuralFrameItem;
+
+    public bool IsWire => _occurrence.IsWire;
+
+    public bool IsPipeFitting => _occurrence.IsPipeFitting;
+
+    public bool IsPipeSegment => _occurrence.IsPipeSegment;
+
+    public bool IsFastenerSystemItem => _occurrence.IsFastenerSystemItem;
+
+    public bool IsCopy => _occurrence.IsCopy;
+
+    public bool IsFamilyOfParts => _occurrence.IsFamilyOfParts;
+
+    public int OccurrenceID => _occurrence.OccurrenceID;
+
+    public object Application => _occurrence.Application;
+
+    public object Parent => _occurrence.Parent;
+
+    public ObjectType Type => _occurrence.Type;
+
+    public bool Visible
+    {
+        get => _occurrence.Visible;
+        set => _occurrence.Visible = value;
+    }
+
+    public bool Locatable
+    {
+        get => _occurrence.Locatable;
+        set => _occurrence.Locatable = value;
+    }
+
+    public string Style
+    {
+        get => _occurrence.Style;
+        set => _occurrence.Style = value;
+    }
+
+    public object FaceStyle
+    {
+        get => _occurrence.FaceStyle;
+        set => _occurrence.FaceStyle = value;
+    }
+
+    public AssemblyDocument TopLevelDocument => _occurrence.TopLevelDocument;
 
     public bool UseSimplified
     {
@@ -185,18 +216,6 @@ public class OccurrenceAdapter : IOccurrenceEsx
 
     public bool IsPatternItem => _occurrence.IsPatternItem;
 
-    public bool IncludeInInterference
-    {
-        get => _occurrence.IncludeInInterference;
-        set => _occurrence.IncludeInInterference = value;
-    }
-
-    public bool DisplayAsReference
-    {
-        get => _occurrence.DisplayAsReference;
-        set => _occurrence.DisplayAsReference = value;
-    }
-
     public SubassemblyBodies SubassemblyBodies => _occurrence.SubassemblyBodies;
 
     public int ItemNumber
@@ -223,18 +242,6 @@ public class OccurrenceAdapter : IOccurrenceEsx
         set => _occurrence.SketchesVisible = value;
     }
 
-    public bool HasUserDefinedName => _occurrence.HasUserDefinedName;
-
-    public bool IsStructuralFrameItem => _occurrence.IsStructuralFrameItem;
-
-    public bool IsWire => _occurrence.IsWire;
-
-    public bool IsPipeFitting => _occurrence.IsPipeFitting;
-
-    public bool IsPipeSegment => _occurrence.IsPipeSegment;
-
-    public bool IsFastenerSystemItem => _occurrence.IsFastenerSystemItem;
-
     public bool DisplayCenterline
     {
         get => _occurrence.DisplayCenterline;
@@ -242,10 +249,6 @@ public class OccurrenceAdapter : IOccurrenceEsx
     }
 
     public ObjectType NodeType => _occurrence.NodeType;
-
-    public bool IsCopy => _occurrence.IsCopy;
-
-    public bool IsFamilyOfParts => _occurrence.IsFamilyOfParts;
 
     public bool DisplayLiveSections
     {
@@ -271,8 +274,6 @@ public class OccurrenceAdapter : IOccurrenceEsx
         set => _occurrence.DisplayDesignBody = value;
     }
 
-    public int OccurrenceID => _occurrence.OccurrenceID;
-
     public bool IsInternalComponent => _occurrence.IsInternalComponent;
 
     public InternalComponent InternalComponent => _occurrence.InternalComponent;
@@ -295,6 +296,130 @@ public class OccurrenceAdapter : IOccurrenceEsx
     public string GetCustomPropertyValue(string customPropertyName)
     {
         return _occurrence.CustomPropertyValue[customPropertyName];
+    }
+
+    public void PutMatrix(ref Array Matrix, bool Replace)
+    {
+        _occurrence.PutMatrix(ref Matrix, Replace);
+    }
+
+    public void GetMatrix(ref Array Matrix)
+    {
+        _occurrence.GetMatrix(ref Matrix);
+    }
+
+    public void GetReferenceKey(ref Array ReferenceKey, out object KeySize)
+    {
+        _occurrence.GetReferenceKey(ref ReferenceKey, out KeySize);
+    }
+
+    public void CreateTopologyReference(ref Array ReferenceKey, out TopologyReference TopologyReference)
+    {
+        _occurrence.CreateTopologyReference(ref ReferenceKey, out TopologyReference);
+    }
+
+    public object GetFaceStyle2(bool vbHonourPrefs)
+    {
+        return _occurrence.GetFaceStyle2(vbHonourPrefs);
+    }
+
+    public AdjustablePart MakeAdjustablePart()
+    {
+        return _occurrence.MakeAdjustablePart();
+    }
+
+    public AdjustablePart GetAdjustablePart()
+    {
+        return _occurrence.GetAdjustablePart();
+    }
+
+    public void GetSimplifiedBodies(out int NumBodies, ref Array SimplifiedBodies)
+    {
+        _occurrence.GetSimplifiedBodies(out NumBodies, ref SimplifiedBodies);
+    }
+
+    public void GetBodyInversionMatrix(ref Array InvMatrix)
+    {
+        _occurrence.GetBodyInversionMatrix(ref InvMatrix);
+    }
+
+    public void GetExplodeMatrix(ref Array Matrix)
+    {
+        _occurrence.GetExplodeMatrix(ref Matrix);
+    }
+
+    public void RemoveOverrideBody()
+    {
+        _occurrence.RemoveOverrideBody();
+    }
+
+    public void GetRangeBox(ref Array MinRangePoint, ref Array MaxRangePoint)
+    {
+        _occurrence.GetRangeBox(ref MinRangePoint, ref MaxRangePoint);
+    }
+
+    public void GetInterpartDrivingOccurrences(out int NumDrivingOccurrences, ref Array DrivingOccurrences)
+    {
+        _occurrence.GetInterpartDrivingOccurrences(out NumDrivingOccurrences, ref DrivingOccurrences);
+    }
+
+    public void GetInterpartDrivenOccurrences(out int NumDrivenOccurrences, ref Array DrivenOccurrences)
+    {
+        _occurrence.GetInterpartDrivenOccurrences(out NumDrivenOccurrences, ref DrivenOccurrences);
+    }
+
+    public void CreateTopologyReferenceToBodyOverride(ref Array ReferenceKey, out TopologyReference TopologyReference)
+    {
+        _occurrence.CreateTopologyReferenceToBodyOverride(ref ReferenceKey, out TopologyReference);
+    }
+
+    public void Range(out double x_min, out double y_min, out double z_min, out double x_max, out double y_max,
+        out double z_max)
+    {
+        _occurrence.Range(out x_min, out y_min, out z_min, out x_max, out y_max, out z_max);
+    }
+
+    public bool FileMissing()
+    {
+        return _occurrence.FileMissing();
+    }
+
+    public bool RecheckMissingFile()
+    {
+        return _occurrence.RecheckMissingFile();
+    }
+
+    public void PutStyleUsePartStyle()
+    {
+        _occurrence.PutStyleUsePartStyle();
+    }
+
+    public void PutStyleNone()
+    {
+        _occurrence.PutStyleNone();
+    }
+
+    public bool GetStyleNone()
+    {
+        return _occurrence.GetStyleNone();
+    }
+
+    public bool GetStyleUsePartStyle()
+    {
+        return _occurrence.GetStyleUsePartStyle();
+    }
+
+    public object BindKeyToTopology(bool BodyOverride, ref Array ReferenceKey)
+    {
+        return _occurrence.BindKeyToTopology(BodyOverride, ref ReferenceKey);
+    }
+
+    public void GetSectionedFacetData(int PartID, out OccurrenceSectionedFacetDataConstants FacetDataPresence,
+        out int FacetCount,
+        ref Array Points, ref Array Normals, ref Array TextureCoords, ref Array StyleIDs, ref Array FaceIDs)
+    {
+        _occurrence.GetSectionedFacetData(PartID, out FacetDataPresence, out FacetCount, ref Points, ref Normals,
+            ref TextureCoords, ref StyleIDs, ref FaceIDs);
     }
 
     public void Delete()
@@ -341,16 +466,6 @@ public class OccurrenceAdapter : IOccurrenceEsx
         _occurrence.Rotate(AxisX1, AxisY1, AxisZ1, AxisX2, AxisY2, AxisZ2, Angle);
     }
 
-    public void PutMatrix(ref Array Matrix, bool Replace)
-    {
-        _occurrence.PutMatrix(ref Matrix, Replace);
-    }
-
-    public void GetMatrix(ref Array Matrix)
-    {
-        _occurrence.GetMatrix(ref Matrix);
-    }
-
     public void Replace(string NewOccurrenceFileName, bool ReplaceAll, object NewFamilyMemberName = null!)
     {
         _occurrence.Replace(NewOccurrenceFileName, ReplaceAll, NewFamilyMemberName);
@@ -366,16 +481,6 @@ public class OccurrenceAdapter : IOccurrenceEsx
         _occurrence.MakeWritable();
     }
 
-    public void GetReferenceKey(ref Array ReferenceKey, out object KeySize)
-    {
-        _occurrence.GetReferenceKey(ref ReferenceKey, out KeySize);
-    }
-
-    public void CreateTopologyReference(ref Array ReferenceKey, out TopologyReference TopologyReference)
-    {
-        _occurrence.CreateTopologyReference(ref ReferenceKey, out TopologyReference);
-    }
-
     public bool IsTube()
     {
         return _occurrence.IsTube();
@@ -389,21 +494,6 @@ public class OccurrenceAdapter : IOccurrenceEsx
     public void SwapFamilyMember(string MemberName, bool SwapAllOccurrences)
     {
         _occurrence.SwapFamilyMember(MemberName, SwapAllOccurrences);
-    }
-
-    public object GetFaceStyle2(bool vbHonourPrefs)
-    {
-        return _occurrence.GetFaceStyle2(vbHonourPrefs);
-    }
-
-    public AdjustablePart MakeAdjustablePart()
-    {
-        return _occurrence.MakeAdjustablePart();
-    }
-
-    public AdjustablePart GetAdjustablePart()
-    {
-        return _occurrence.GetAdjustablePart();
     }
 
     public bool IsAlternateComponent()
@@ -431,11 +521,6 @@ public class OccurrenceAdapter : IOccurrenceEsx
         _occurrence.GetAllAlternateComponents(out AlternateComponentCount, out AlternateComponentFileNames);
     }
 
-    public void GetSimplifiedBodies(out int NumBodies, ref Array SimplifiedBodies)
-    {
-        _occurrence.GetSimplifiedBodies(out NumBodies, ref SimplifiedBodies);
-    }
-
     public void CaptureRelationships(int RelationshipCount, ref Array RelationshipsToCapture)
     {
         _occurrence.CaptureRelationships(RelationshipCount, ref RelationshipsToCapture);
@@ -444,26 +529,6 @@ public class OccurrenceAdapter : IOccurrenceEsx
     public void ClearCapturedRelationships()
     {
         _occurrence.ClearCapturedRelationships();
-    }
-
-    public void GetBodyInversionMatrix(ref Array InvMatrix)
-    {
-        _occurrence.GetBodyInversionMatrix(ref InvMatrix);
-    }
-
-    public void GetExplodeMatrix(ref Array Matrix)
-    {
-        _occurrence.GetExplodeMatrix(ref Matrix);
-    }
-
-    public void RemoveOverrideBody()
-    {
-        _occurrence.RemoveOverrideBody();
-    }
-
-    public void GetRangeBox(ref Array MinRangePoint, ref Array MaxRangePoint)
-    {
-        _occurrence.GetRangeBox(ref MinRangePoint, ref MaxRangePoint);
     }
 
     public void RetrieveHoleLocation()
@@ -476,45 +541,14 @@ public class OccurrenceAdapter : IOccurrenceEsx
         _occurrence.DeleteHoleLocation();
     }
 
-    public void GetInterpartDrivingOccurrences(out int NumDrivingOccurrences, ref Array DrivingOccurrences)
-    {
-        _occurrence.GetInterpartDrivingOccurrences(out NumDrivingOccurrences, ref DrivingOccurrences);
-    }
-
-    public void GetInterpartDrivenOccurrences(out int NumDrivenOccurrences, ref Array DrivenOccurrences)
-    {
-        _occurrence.GetInterpartDrivenOccurrences(out NumDrivenOccurrences, ref DrivenOccurrences);
-    }
-
-    public void CreateTopologyReferenceToBodyOverride(ref Array ReferenceKey, out TopologyReference TopologyReference)
-    {
-        _occurrence.CreateTopologyReferenceToBodyOverride(ref ReferenceKey, out TopologyReference);
-    }
-
     public void ResetName()
     {
         _occurrence.ResetName();
     }
 
-    public void Range(out double x_min, out double y_min, out double z_min, out double x_max, out double y_max,
-        out double z_max)
-    {
-        _occurrence.Range(out x_min, out y_min, out z_min, out x_max, out y_max, out z_max);
-    }
-
     public void GetSimplifiedBodies2(out int NumBodies, ref Array SimplifiedBodies, ref Array Transforms)
     {
         _occurrence.GetSimplifiedBodies2(out NumBodies, ref SimplifiedBodies, ref Transforms);
-    }
-
-    public bool FileMissing()
-    {
-        return _occurrence.FileMissing();
-    }
-
-    public bool RecheckMissingFile()
-    {
-        return _occurrence.RecheckMissingFile();
     }
 
     public void FrameSaveAs(string FileName)
@@ -527,42 +561,9 @@ public class OccurrenceAdapter : IOccurrenceEsx
         _occurrence.FrameSaveAsTranslated(FileName);
     }
 
-    public void PutStyleUsePartStyle()
-    {
-        _occurrence.PutStyleUsePartStyle();
-    }
-
-    public void PutStyleNone()
-    {
-        _occurrence.PutStyleNone();
-    }
-
-    public bool GetStyleNone()
-    {
-        return _occurrence.GetStyleNone();
-    }
-
-    public bool GetStyleUsePartStyle()
-    {
-        return _occurrence.GetStyleUsePartStyle();
-    }
-
     public string FrameSaveAsBiDM(string FilePath, string DocumentNumber, string Revision, string Title)
     {
         return _occurrence.FrameSaveAsBiDM(FilePath, DocumentNumber, Revision, Title);
-    }
-
-    public object BindKeyToTopology(bool BodyOverride, ref Array ReferenceKey)
-    {
-        return _occurrence.BindKeyToTopology(BodyOverride, ref ReferenceKey);
-    }
-
-    public void GetSectionedFacetData(int PartID, out OccurrenceSectionedFacetDataConstants FacetDataPresence,
-        out int FacetCount,
-        ref Array Points, ref Array Normals, ref Array TextureCoords, ref Array StyleIDs, ref Array FaceIDs)
-    {
-        _occurrence.GetSectionedFacetData(PartID, out FacetDataPresence, out FacetCount, ref Points, ref Normals,
-            ref TextureCoords, ref StyleIDs, ref FaceIDs);
     }
 
     public void CutLength(out double dCutLength)
@@ -605,8 +606,8 @@ public class OccurrenceAdapter : IOccurrenceEsx
         return _occurrence.HasSuppressionVariable();
     }
 
-    public bool GetIsAttributeSetPresent(string Name)
+    public bool GetIsAttributeSetPresent(string AttributeName)
     {
-        return _occurrence.IsAttributeSetPresent[Name];
+        return _occurrence.IsAttributeSetPresent[AttributeName];
     }
 }

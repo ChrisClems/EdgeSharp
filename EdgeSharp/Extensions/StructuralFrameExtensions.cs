@@ -13,7 +13,7 @@ public static class StructuralFrameExtensions
     }
 
     /// <summary>
-    /// Gets the structural frame sections for a given StructuralFrame.
+    ///     Gets the structural frame sections for a given StructuralFrame.
     /// </summary>
     /// <param name="frame">The StructuralFrame to retrieve sections for.</param>
     /// <returns>A list of StructuralFrameSection objects representing the sections of the given StructuralFrame.</returns>

@@ -1,14 +1,14 @@
-﻿using SolidEdgePart;
-using OpenMcdf;
+﻿using OpenMcdf;
+using SolidEdgePart;
 
 namespace EdgeSharp.Extensions;
 
 public static class PartDocumentExtensions
 {
     /// <summary>
-    /// Forces the specified Part Document to be saved as a Sheet Metal Document.
-    /// !!! WARNING: EXPERIMENTAL! MODIFIES THE CLSID OF THE COM STRUCTURED STORAGE FILE. !!!
-    /// !!! MAY CORRUPT FILES !!!
+    ///     Forces the specified Part Document to be saved as a Sheet Metal Document.
+    ///     !!! WARNING: EXPERIMENTAL! MODIFIES THE CLSID OF THE COM STRUCTURED STORAGE FILE. !!!
+    ///     !!! MAY CORRUPT FILES !!!
     /// </summary>
     /// <param name="doc">The Part Document to be saved.</param>
     /// <param name="newName">The new path and filename for the Sheet Metal Document. Does not support overwrite.</param>

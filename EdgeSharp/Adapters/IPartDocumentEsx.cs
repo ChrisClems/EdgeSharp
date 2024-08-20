@@ -1,10 +1,11 @@
 using SolidEdgeFramework;
 using SolidEdgeFrameworkSupport;
 using SolidEdgePart;
+// ReSharper disable InconsistentNaming
 
 namespace EdgeSharp.Adapters;
 
-public interface IPartMetalDocument
+public interface IPartDocumentEsx
 {
     Application Application { get; }
 
@@ -103,7 +104,7 @@ public interface IPartMetalDocument
     object FaceStyles { get; }
 
     bool DesignBodyVisible { get; set; }
-    
+
     int GeometricVersion { get; }
 
     EdgebarFeatures DesignEdgebarFeatures { get; }
@@ -201,7 +202,7 @@ public interface IPartMetalDocument
         object ReadOnlyRecommended = null, object NewStatus = null, object CreateBackup = null,
         object UpdateLinkInContainer = null, object UpdateAllLinksInContainer = null);
 
-    public void SaveCopyAs(string Name);
+    public void SaveCopyAs(string NewCopyName);
 
     public void SaveAsJT(string NewName, object Include_PreciseGeom = null, object Prod_Structure_Option = null,
         object Export_PMI = null, object Export_CoordinateSystem = null, object Export_3DBodies = null,
@@ -299,7 +300,7 @@ public interface IPartMetalDocument
 
     public void ShowOnly(object NumObjects = null, object Objects = null);
 
-    public MeasureVariable AddMeasureVariable(MeasureVariableTypeConstants Type,
+    public MeasureVariable AddMeasureVariable(MeasureVariableTypeConstants variableType,
         MeasureVariableValueConstants ValueType,
         object Geom1, object Geom2, object Geom3 = null);
 
@@ -397,7 +398,7 @@ public interface IPartMetalDocument
 
     public void LoadUOMPreferences(bool UpdateUomGlobals);
 
-    public void CopytoPMI(object featureObj, seCopytoPMIConstants Type);
+    public void CopytoPMI(object featureObj, seCopytoPMIConstants PMIType);
 
-    public object get_AddInsStorage(string Name, int grfMode);
+    public object get_AddInsStorage(string StorageName, int grfMode);
 }

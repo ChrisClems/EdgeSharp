@@ -1,65 +1,141 @@
 ﻿using SolidEdgeAssembly;
+using SolidEdgeFramework;
+// ReSharper disable InconsistentNaming
 
 namespace EdgeSharp.Adapters;
 
 public interface IOccurrenceEsx
 {
-    bool Visible { get; set; }
+    public object Application { get; }
 
-    bool UseSimplified { get; set; }
+    public object Parent { get; }
+    
+    public object OccurrenceDocument { get; }
 
-    bool DisplayReferencePlanes { get; set; }
-    bool DisplayCoordinateSystems { get; set; }
-    bool DisplayConstructions { get; set; }
-    bool DisplayConstrCurves { get; set; }
+    public AssemblyDocument TopLevelDocument { get; }
 
-    bool DisplayReferenceAxes { get; set; }
+    public ObjectType Type { get; }
 
-    bool DisplaySketches { get; set; }
-    bool DisplayAsLastSaved { get; set; }
-    bool Adjustable { get; set; }
-    int ItemNumber { get; set; }
-    bool ReferencePlanesVisible { get; set; }
-    bool CoordinateSystemsVisible { get; set; }
-    bool SketchesVisible { get; set; }
-    bool DisplayCenterline { get; set; }
-    bool DisplayLiveSections { get; set; }
-    bool DisplayDimensions { get; set; }
-    bool DisplayAnnotations { get; set; }
-    bool DisplayDesignBody { get; set; }
-    string Name { get; }
+    public bool Visible { get; set; }
 
-    bool Subassembly { get; }
+    public bool UseSimplified { get; set; }
 
-    SubOccurrences SubOccurrences { get; }
-    string GetCustomPropertyValue(string key);
+    public bool DisplayReferencePlanes { get; set; }
 
-    void SetCustomPropertyValue(string key, string value);
-    void GetMatrix(ref Array Matrix);
-    void CreateTopologyReference(ref Array ReferenceKey, out TopologyReference TopologyReference);
-    AdjustablePart MakeAdjustablePart();
-    AdjustablePart GetAdjustablePart();
-    void GetExplodeMatrix(ref Array Matrix);
-    void RemoveOverrideBody();
-    void GetRangeBox(ref Array MinRangePoint, ref Array MaxRangePoint);
+    public bool DisplayCoordinateSystems { get; set; }
+
+    public bool DisplayConstructions { get; set; }
+
+    public bool DisplayConstrCurves { get; set; }
+
+    public bool DisplayReferenceAxes { get; set; }
+
+    public bool DisplaySketches { get; set; }
+
+    public bool DisplayAsLastSaved { get; set; }
+
+    public bool Adjustable { get; set; }
+
+    public bool HasBodyOverride { get; }
+
+    public object Body { get; }
+
+    public bool IsPatterned { get; }
+
+    public bool IsPatternItem { get; }
+
+    public bool IsAdjustablePart { get; }
+
+    public SubassemblyBodies SubassemblyBodies { get; }
+
+    public int ItemNumber { get; set; }
+
+    public bool ReferencePlanesVisible { get; set; }
+
+    public bool CoordinateSystemsVisible { get; set; }
+
+    public bool SketchesVisible { get; set; }
+
+    public bool DisplayCenterline { get; set; }
+
+    public ObjectType NodeType { get; }
+
+    public bool DisplayLiveSections { get; set; }
+
+    public bool DisplayDimensions { get; set; }
+
+    public bool DisplayAnnotations { get; set; }
+
+    public bool DisplayDesignBody { get; set; }
+
+    public bool Locatable { get; set; }
+
+    public object FaceStyle { get; set; }
+
+    public string Style { get; set; }
+
+    public bool IsInternalComponent { get; }
+
+    public InternalComponent InternalComponent { get; }
+
+    public SubOccurrences SubOccurrences { get; }
+
+    public bool Subassembly { get; }
+
+    public string Name { get; }
+
+    public void SetCustomPropertyValue(string customPropertyName, string value);
+
+    public string GetCustomPropertyValue(string customPropertyName);
+
+    public void GetReferenceKey(ref Array ReferenceKey, out object KeySize);
+
+    public void GetMatrix(ref Array Matrix);
+
+    public void CreateTopologyReference(ref Array ReferenceKey, out TopologyReference TopologyReference);
+
+    public void PutMatrix(ref Array Matrix, bool Replace);
+
+    public void GetSimplifiedBodies(out int NumBodies, ref Array SimplifiedBodies);
+
+    public void GetBodyInversionMatrix(ref Array InvMatrix);
+
+    public AdjustablePart MakeAdjustablePart();
+
+    public AdjustablePart GetAdjustablePart();
+
+    public void GetExplodeMatrix(ref Array Matrix);
+
+    public void RemoveOverrideBody();
+
+    public void GetRangeBox(ref Array MinRangePoint, ref Array MaxRangePoint);
+
     public void GetInterpartDrivingOccurrences(out int NumDrivingOccurrences, ref Array DrivingOccurrences);
-    public void GetInterpartDrivenOccurrences(out int NumDrivenOccurrences, ref Array DrivenOccurrences);
-    void CreateTopologyReferenceToBodyOverride(ref Array ReferenceKey, out TopologyReference TopologyReference);
 
-    void Range(out double x_min, out double y_min, out double z_min, out double x_max, out double y_max,
+    public void GetInterpartDrivenOccurrences(out int NumDrivenOccurrences, ref Array DrivenOccurrences);
+
+    public void CreateTopologyReferenceToBodyOverride(ref Array ReferenceKey, out TopologyReference TopologyReference);
+
+    public void Range(out double x_min, out double y_min, out double z_min, out double x_max, out double y_max,
         out double z_max);
 
-    bool FileMissing();
+    public bool FileMissing();
 
-    bool RecheckMissingFile();
+    public bool RecheckMissingFile();
 
-    void PutStyleUsePartStyle();
-    void PutStyleNone();
-    bool GetStyleNone();
-    bool GetStyleUsePartStyle();
-    object BindKeyToTopology(bool BodyOverride, ref Array ReferenceKey);
+    public object GetFaceStyle2(bool vbHonourPrefs);
 
-    void GetSectionedFacetData(int PartID, out OccurrenceSectionedFacetDataConstants FacetDataPresence,
+    public void PutStyleUsePartStyle();
+
+    public void PutStyleNone();
+
+    public bool GetStyleNone();
+
+    public bool GetStyleUsePartStyle();
+
+    public object BindKeyToTopology(bool BodyOverride, ref Array ReferenceKey);
+
+    public void GetSectionedFacetData(int PartID, out OccurrenceSectionedFacetDataConstants FacetDataPresence,
         out int FacetCount,
         ref Array Points, ref Array Normals, ref Array TextureCoords, ref Array StyleIDs, ref Array FaceIDs);
 }

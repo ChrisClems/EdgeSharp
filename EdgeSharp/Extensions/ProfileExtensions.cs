@@ -7,7 +7,7 @@ namespace EdgeSharp.Extensions;
 public static class ProfileExtensions
 {
     /// <summary>
-    /// Retries the paste operation on a profile in Solid Edge.
+    ///     Retries the paste operation on a profile in Solid Edge.
     /// </summary>
     /// <param name="profile">The profile to paste.</param>
     /// <param name="retryCount">The maximum number of retry attempts. Default value is -1 (unlimited).</param>
@@ -17,7 +17,6 @@ public static class ProfileExtensions
     {
         const uint CLIPBRD_E_CANT_OPEN = 0x800401D0;
         while (retryCount != 0)
-        {
             try
             {
                 profile.Paste();
@@ -26,17 +25,11 @@ public static class ProfileExtensions
             catch (COMException ex)
             {
                 if ((uint)ex.ErrorCode != CLIPBRD_E_CANT_OPEN)
-                {
                     throw new Exception(
                         "Error pasting text profile. Try opening and closing the text profile dialog in Solid Edge to fix and re-run.",
                         ex);
-                }
-                if (retryCount > 0)
-                {
-                    retryCount--;
-                }
+                if (retryCount > 0) retryCount--;
                 Thread.Sleep(retryDelay);
             }
-        }
     }
 }

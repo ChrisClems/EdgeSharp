@@ -1,5 +1,6 @@
 ﻿using SolidEdgeAssembly;
 using SolidEdgeFramework;
+// ReSharper disable InconsistentNaming
 
 namespace EdgeSharp.Adapters;
 
@@ -12,15 +13,13 @@ public class SubOccurrenceAdapter : IOccurrenceEsx
         _subOccurrence = subOccurrence;
     }
 
-    public Application Application => _subOccurrence.Application;
+    public object Application => _subOccurrence.Application;
 
     public object Parent => _subOccurrence.Parent;
 
     public AssemblyDocument TopLevelDocument => _subOccurrence.TopLevelDocument;
-
-    public object SubOccurrenceDocument => _subOccurrence.SubOccurrenceDocument;
-
-    public string SubOccurrenceFileName => _subOccurrence.SubOccurrenceFileName;
+    
+    public object OccurrenceDocument => _subOccurrence.ThisAsOccurrence;
 
     public ObjectType Type => _subOccurrence.Type;
 
@@ -229,7 +228,7 @@ public class SubOccurrenceAdapter : IOccurrenceEsx
     {
         return _subOccurrence.CustomPropertyValue[customPropertyName];
     }
-
+    
     public void GetReferenceKey(ref Array ReferenceKey, out object KeySize)
     {
         _subOccurrence.GetReferenceKey(ref ReferenceKey, out KeySize);

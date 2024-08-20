@@ -24,7 +24,6 @@ internal partial class Marshal
             System.Runtime.InteropServices.Marshal.ThrowExceptionForHR(hr);
 
         return null;
-
     }
 
     [LibraryImport("ole32")]
