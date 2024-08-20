@@ -4,6 +4,9 @@ using SolidEdgeFramework;
 
 namespace EdgeSharp.Adapters;
 
+/// <summary>
+/// Represents an occurrence or suboccurrence in a Solid Edge assembly document.
+/// </summary>
 public interface IOccurrenceEsx
 {
     public object Application { get; }

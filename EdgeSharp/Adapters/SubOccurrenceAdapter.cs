@@ -1,5 +1,6 @@
 ﻿using SolidEdgeAssembly;
 using SolidEdgeFramework;
+
 // ReSharper disable InconsistentNaming
 
 namespace EdgeSharp.Adapters;
@@ -18,8 +19,8 @@ public class SubOccurrenceAdapter : IOccurrenceEsx
     public object Parent => _subOccurrence.Parent;
 
     public AssemblyDocument TopLevelDocument => _subOccurrence.TopLevelDocument;
-    
-    public object OccurrenceDocument => _subOccurrence.ThisAsOccurrence;
+
+    public object OccurrenceDocument => _subOccurrence.ThisAsOccurrence.OccurrenceDocument;
 
     public ObjectType Type => _subOccurrence.Type;
 
@@ -83,8 +84,6 @@ public class SubOccurrenceAdapter : IOccurrenceEsx
         set => _subOccurrence.Adjustable = value;
     }
 
-    public Occurrence ThisAsOccurrence => _subOccurrence.ThisAsOccurrence;
-
     public bool HasBodyOverride => _subOccurrence.HasBodyOverride;
 
     public object Body => _subOccurrence.Body;
@@ -127,8 +126,6 @@ public class SubOccurrenceAdapter : IOccurrenceEsx
         set => _subOccurrence.DisplayCenterline = value;
     }
 
-    public Reference Reference => _subOccurrence.Reference;
-
     public ObjectType NodeType => _subOccurrence.NodeType;
 
     public bool DisplayLiveSections
@@ -155,46 +152,10 @@ public class SubOccurrenceAdapter : IOccurrenceEsx
         set => _subOccurrence.DisplayDesignBody = value;
     }
 
-    public bool HideInDrawing
-    {
-        get => _subOccurrence.HideInDrawing;
-        set => _subOccurrence.HideInDrawing = value;
-    }
-
-    public bool HideInSubassembly
-    {
-        get => _subOccurrence.HideInSubassembly;
-        set => _subOccurrence.HideInSubassembly = value;
-    }
-
     public bool Locatable
     {
         get => _subOccurrence.Locatable;
         set => _subOccurrence.Locatable = value;
-    }
-
-    public bool DisplayAsDraftReference
-    {
-        get => _subOccurrence.DisplayAsDraftReference;
-        set => _subOccurrence.DisplayAsDraftReference = value;
-    }
-
-    public bool ExcludeFromPhysicalProperties
-    {
-        get => _subOccurrence.ExcludeFromPhysicalProperties;
-        set => _subOccurrence.ExcludeFromPhysicalProperties = value;
-    }
-
-    public bool ExcludeFromReports
-    {
-        get => _subOccurrence.ExcludeFromReports;
-        set => _subOccurrence.ExcludeFromReports = value;
-    }
-
-    public bool ExcludeFromInterference
-    {
-        get => _subOccurrence.ExcludeFromInterference;
-        set => _subOccurrence.ExcludeFromInterference = value;
     }
 
     public object FaceStyle
@@ -228,7 +189,7 @@ public class SubOccurrenceAdapter : IOccurrenceEsx
     {
         return _subOccurrence.CustomPropertyValue[customPropertyName];
     }
-    
+
     public void GetReferenceKey(ref Array ReferenceKey, out object KeySize)
     {
         _subOccurrence.GetReferenceKey(ref ReferenceKey, out KeySize);
@@ -242,14 +203,6 @@ public class SubOccurrenceAdapter : IOccurrenceEsx
     public void CreateTopologyReference(ref Array ReferenceKey, out TopologyReference TopologyReference)
     {
         _subOccurrence.CreateTopologyReference(ref ReferenceKey, out TopologyReference);
-    }
-
-    public void GetMaterial(ref Array DiffuseColor, ref Array AmbientColor, ref Array SpecularColor,
-        ref Array EmissionColor,
-        out double Shininess, out double Opacity)
-    {
-        _subOccurrence.GetMaterial(ref DiffuseColor, ref AmbientColor, ref SpecularColor, ref EmissionColor,
-            out Shininess, out Opacity);
     }
 
     public void PutMatrix(ref Array Matrix, bool Replace)
