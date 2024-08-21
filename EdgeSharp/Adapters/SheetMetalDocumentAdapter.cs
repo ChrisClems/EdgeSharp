@@ -8,11 +8,11 @@ using SolidEdgePart;
 
 namespace EdgeSharp.Adapters;
 
-public class SheetDocumentAdapter : IPartDocumentEsx
+public class SheetMetalDocumentAdapter : IPartDocumentEsx
 {
     private readonly SheetMetalDocument _sheetMetalDocument;
 
-    public SheetDocumentAdapter(SheetMetalDocument sheetMetalDocument)
+    public SheetMetalDocumentAdapter(SheetMetalDocument sheetMetalDocument)
     {
         _sheetMetalDocument = sheetMetalDocument;
     }
