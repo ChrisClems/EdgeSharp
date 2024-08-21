@@ -15,6 +15,8 @@ public interface IOccurrenceEsx
     
     public object OccurrenceDocument { get; }
 
+    public string OccurrenceFileName { get; }
+
     public AssemblyDocument TopLevelDocument { get; }
 
     public ObjectType Type { get; }

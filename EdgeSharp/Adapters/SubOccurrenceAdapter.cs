@@ -22,6 +22,8 @@ public class SubOccurrenceAdapter : IOccurrenceEsx
 
     public object OccurrenceDocument => _subOccurrence.ThisAsOccurrence.OccurrenceDocument;
 
+    public string OccurrenceFileName => _subOccurrence.SubOccurrenceFileName;
+
     public ObjectType Type => _subOccurrence.Type;
 
     public bool Visible

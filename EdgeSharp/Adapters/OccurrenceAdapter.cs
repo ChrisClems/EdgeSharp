@@ -16,6 +16,8 @@ public class OccurrenceAdapter : IOccurrenceEsx
     }
 
     public object OccurrenceDocument => _occurrence.OccurrenceDocument;
+    
+    public string OccurrenceFileName => _occurrence.OccurrenceFileName;
 
     public object Application => _occurrence.Application;
 
