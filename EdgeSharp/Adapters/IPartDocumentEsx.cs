@@ -12,11 +12,13 @@ public interface IPartDocumentEsx
     string FullName { get; }
 
     string Name { get; set; }
+    
     Application Parent { get; }
 
     string Path { get; }
 
     bool ReadOnly { get; set; }
+    
     object RoutingSlip { get; }
 
     SelectSet SelectSet { get; }
@@ -28,7 +30,9 @@ public interface IPartDocumentEsx
     object Properties { get; }
 
     bool IsTemplate { get; set; }
+    
     DocumentStatus Status { get; set; }
+    
     UnitsOfMeasure UnitsOfMeasure { get; }
 
     object ActiveSketch { get; }
@@ -51,6 +55,7 @@ public interface IPartDocumentEsx
     bool InPlaceActivated { get; }
 
     int UndoSteps { get; set; }
+    
     bool IsInsightFile { get; }
 
     NamedViews NamedViews { get; }
@@ -60,6 +65,7 @@ public interface IPartDocumentEsx
     bool IsGeometricVersionDirty { get; }
 
     int ProfileUndoSteps { get; set; }
+    
     object Variables { get; }
 
     object InterpartLinks { get; }
@@ -120,6 +126,7 @@ public interface IPartDocumentEsx
     bool IsAdjustablePart { get; }
 
     bool HardwareFile { get; set; }
+    
     bool HasCapturedRelationships { get; }
 
     int CapturedRelationshipCount { get; }
@@ -140,7 +147,9 @@ public interface IPartDocumentEsx
     PMI PMI { get; }
 
     ModelingModeConstants ModelingMode { get; set; }
+    
     bool DisableMoveToSynchronous { get; set; }
+    
     object LinearStyles { get; }
 
     object FillStyles { get; }
@@ -148,6 +157,7 @@ public interface IPartDocumentEsx
     object HatchPatternStyles { get; }
 
     bool AutomaticTransitionToSolutionManager { get; set; }
+    
     EdgebarFeatures FlatPatternEdgebarFeatures { get; }
 
     BendTable BendTable { get; }
@@ -163,6 +173,7 @@ public interface IPartDocumentEsx
     SketchBlocks Blocks { get; }
 
     bool OrderedBodyInSyncVisible { get; set; }
+    
     object PhysicalPropertiesChangeEvents { get; }
 
     object TextStyles { get; }
@@ -170,6 +181,7 @@ public interface IPartDocumentEsx
     object TextCharStyles { get; }
 
     bool UpdateOnFileSave { get; set; }
+    
     bool IsFamilyOfPartsMaster { get; }
 
     bool IsFamilyOfPartsMember { get; }
