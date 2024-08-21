@@ -51,16 +51,31 @@ app.DoIdle((doc) => doc.Save())
 Traverse all occurrences in an assmelby, performing a passed delegate on each occurrence as a SolidEdgeDocument:
 
 ```C#
-void PrintDocumentName(SolidEdgeDocument doc)
+void PrintOccurrenceName(IOccurrenceEsx occurrence)
 {
-    Console.WriteLine(doc.FullName);
+    Console.WriteLine(occurrence.Name);
 }
 // Traverses every occurnece in an assembly recurisvely, running PrintDocumentName() to write the doc name to the console.
 // More advanced functions can be done by document type detection and casting. More helpers to come.
-assemblyDoc.TraverseAssemblyWithAction(PrintDocumentName, recursive:true);
+assemblyDoc.TraverseOccurrencesWithAction(PrintDocumentName, recursive:true);
+```
+
+The IOcurrenceEsx interface in the above example is an adapter interface for Occurrence and SubOcurrence types so that one may iterate over occurrences within an assembly and access common methods between them.
+
+```C#
+IOccurrenceEsx occurrenceAdapter = new OccurrenceAdapter(occurrence)
+IOccurrenceEsx subOccurrenceAdapter = new SubOccurrenceAdapter(subOccurrence);
+```
+
+The same can be done with PartDocument and SheetMetalDocument types.
+
+```C#
+IPartDocumentEsx partDocumentAdapter = new PartDocumentAdapter(part)
+IPartDocumentEsx SheetMetalDocumentAdapter = new SheetMetalDocument(sheetMetalPart);
 ```
 
 Open document without opening a window for it in the Solid Edge client, regardless of visiblity settings:
+
 ```C#
 // Open file using the DocRelationAutoServer parameter to improve performance.
 var backgroundDoc = app.Documents.OpenInBackground("path/to/file.par");
@@ -72,12 +87,7 @@ Return the full property set of a Solid Edge Document to a nested dictionary for
 var propertySetDict = backgroundDoc.PropertySetsToDictionary();
 ```
 
-Future functionality on the roadmap:
-
-* Adapter interfaces to consolidate common members on similar types. e.g. PartDocument/SheetMetalDocument and Occurrence/SubOcurrence.
-* Offline (Solid Edge not running) property reading and writing
-* Ini file management for export settings config
-* Proper documentation generation
+See issues for feature roadmap.
 
 ## Build:
 
