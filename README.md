@@ -60,7 +60,7 @@ void PrintOccurrenceName(IOccurrenceEsx occurrence)
 assemblyDoc.TraverseOccurrencesWithAction(PrintDocumentName, recursive:true);
 ```
 
-The IOcurrenceEsx interface in the above example is an adapter interface for Occurrence and SubOcurrence types so that one may iterate over occurrences within an assembly and access common methods between them.
+The IOcurrenceEsx interface in the above example is an adapter interface for Occurrence and SubOcurrence types so that one may iterate over occurrences within an assembly and access common methods between them without creating two complete code paths.
 
 ```C#
 IOccurrenceEsx occurrenceAdapter = new OccurrenceAdapter(occurrence)
@@ -71,7 +71,7 @@ The same can be done with PartDocument and SheetMetalDocument types.
 
 ```C#
 IPartDocumentEsx partDocumentAdapter = new PartDocumentAdapter(part)
-IPartDocumentEsx SheetMetalDocumentAdapter = new SheetMetalDocument(sheetMetalPart);
+IPartDocumentEsx sheetMetalDocumentAdapter = new SheetMetalDocumentAdapter(sheetMetalPart);
 ```
 
 Open document without opening a window for it in the Solid Edge client, regardless of visiblity settings:
