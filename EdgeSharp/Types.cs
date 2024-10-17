@@ -16,8 +16,11 @@ public class Coordinate
 /// </summary>
 public class StructuralFrameSection
 {
+    
     public double EndAngle1;
     public double EndAngle2;
+    public double SideAngle1;
+    public double SideAngle2;
     public double Length;
 
     public int OccurrenceId;
@@ -27,8 +30,7 @@ public class StructuralFrameSection
     public StructuralFrame Parent;
     public Coordinate Rotation;
     public Occurrence SectionOccurrence;
-    public double SideAngle1;
-    public double SideAngle2;
+
 
     internal StructuralFrameSection(StructuralFrame frame, int sectionId)
     {
