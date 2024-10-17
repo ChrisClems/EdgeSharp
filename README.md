@@ -1,9 +1,7 @@
 # EdgeSharp
 
 EdgeSharp is a .NET library for interacting with Solid Edge. It is the spiritual successor to [SolidEdge.Community](https://github.com/SolidEdgeCommunity/SolidEdge.Community), built on modern versions of .NET.
-## EdgeSharp is very much in an experimental and developmental stage. While this was created for me to use in production to replace a bunch of boilerplate code, it is also a learning experience project for me and it should be treated as an eductional pet project until it has had time to mature and be battle tested.
-
-The initial goal of EdgeSharp is to implement [Interop.SolidEdge](https://github.com/ChrisClems/Interop.SolidEdge) and basic connection helper functions in a package that targets .NET 8. EdgeSharp will continue to target the latest LTS version of .NET for the foreseeable future. Working with the Solid Edge COM interface in modern .NET has undergone minimal testing and no major breakage has been found. You can see practical examples of what this library is trying to accomplish by browsing the examples below.
+## EdgeSharp is very much in an experimental and developmental stage. APIs will occassionally change and you may find edge use cases where things break for you where they worked for me. Feel free to submit issues with any questions.
 
 As development progresses, features will be added as helper utilities, extension methods, and adapter interfaces based on patterns in my own workflow where I've benefitted from creating boilerplate snippets that I've reused in multiple projects. Old SolidEdge.Community extensions can be easily implemented. Feel free to open an issue with a link to the original code.
 
@@ -60,7 +58,7 @@ void PrintOccurrenceName(IOccurrenceEsx occurrence)
 assemblyDoc.TraverseOccurrencesWithAction(PrintDocumentName, recursive:true);
 ```
 
-The IOcurrenceEsx interface in the above example is an adapter interface for Occurrence and SubOcurrence types so that one may iterate over occurrences within an assembly and access common methods between them without creating two complete code paths.
+The IOcurrenceEsx interface in the above example is an adapter interface for Occurrence and SubOcurrence types so that one may iterate over occurrences within an assembly and access common methods between them without creating two separate code paths.
 
 ```C#
 IOccurrenceEsx occurrenceAdapter = new OccurrenceAdapter(occurrence)
