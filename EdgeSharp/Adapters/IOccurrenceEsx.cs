@@ -14,12 +14,16 @@ public interface IOccurrenceEsx
     public object Parent { get; }
     
     public object OccurrenceDocument { get; }
+    
+    public SolidEdgeDocument SEDocEsx { get; }
 
     public string OccurrenceFileName { get; }
 
     public AssemblyDocument TopLevelDocument { get; }
 
     public ObjectType Type { get; }
+    
+    public DocumentTypeConstants DocumentTypeEsx { get; }
 
     public bool Visible { get; set; }
 

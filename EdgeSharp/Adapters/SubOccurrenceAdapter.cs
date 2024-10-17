@@ -1,4 +1,5 @@
-﻿using SolidEdgeAssembly;
+﻿using EdgeSharp.Extensions;
+using SolidEdgeAssembly;
 using SolidEdgeFramework;
 
 // ReSharper disable InconsistentNaming
@@ -21,10 +22,14 @@ public class SubOccurrenceAdapter : IOccurrenceEsx
     public AssemblyDocument TopLevelDocument => _subOccurrence.TopLevelDocument;
 
     public object OccurrenceDocument => _subOccurrence.ThisAsOccurrence.OccurrenceDocument;
+    
+    public SolidEdgeDocument SEDocEsx => (SolidEdgeDocument)_subOccurrence.SubOccurrenceDocument;
 
     public string OccurrenceFileName => _subOccurrence.SubOccurrenceFileName;
 
     public ObjectType Type => _subOccurrence.Type;
+    
+    public DocumentTypeConstants DocumentTypeEsx => _subOccurrence.GetSeDocument().Type;
 
     public bool Visible
     {

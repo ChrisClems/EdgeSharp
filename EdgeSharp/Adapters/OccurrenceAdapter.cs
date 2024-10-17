@@ -1,4 +1,5 @@
-﻿using SolidEdgeAssembly;
+﻿using EdgeSharp.Extensions;
+using SolidEdgeAssembly;
 using SolidEdgeFramework;
 using SolidEdgePart;
 
@@ -17,6 +18,8 @@ public class OccurrenceAdapter : IOccurrenceEsx
 
     public object OccurrenceDocument => _occurrence.OccurrenceDocument;
     
+    public SolidEdgeDocument SEDocEsx => (SolidEdgeDocument)_occurrence.OccurrenceDocument;
+    
     public string OccurrenceFileName => _occurrence.OccurrenceFileName;
 
     public object Application => _occurrence.Application;
@@ -24,6 +27,8 @@ public class OccurrenceAdapter : IOccurrenceEsx
     public object Parent => _occurrence.Parent;
 
     public ObjectType Type => _occurrence.Type;
+
+    public DocumentTypeConstants DocumentTypeEsx => _occurrence.GetSeDocument().Type;
 
     public bool Visible
     {
