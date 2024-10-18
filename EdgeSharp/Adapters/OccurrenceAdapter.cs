@@ -17,6 +17,10 @@ public class OccurrenceAdapter : IOccurrenceEsx
     }
 
     public object OccurrenceDocument => _occurrence.OccurrenceDocument;
+
+    public Occurrence ThisAsOccurrence => _occurrence;
+
+    public int OccurrenceId => _occurrence.OccurrenceID;
     
     public SolidEdgeDocument SEDocEsx => (SolidEdgeDocument)_occurrence.OccurrenceDocument;
     
@@ -29,6 +33,8 @@ public class OccurrenceAdapter : IOccurrenceEsx
     public ObjectType Type => _occurrence.Type;
 
     public DocumentTypeConstants DocumentTypeEsx => _occurrence.GetSeDocument().Type;
+
+    public string OccurrenceType => EsxDocumentTypeConstants.OccurrenceDocument;
 
     public bool Visible
     {

@@ -253,4 +253,48 @@ public static class AssemblyExtensions
             }
         }
     }
+
+    // TODO: Enhance this method to support different search patterns, contains/exact, case sensitivity, etc.
+    /// <summary>
+    /// Finds occurrences by name within an assembly document.
+    /// </summary>
+    /// <param name="asm">The assembly document to search for occurrences.</param>
+    /// <param name="name">The (case insensitive) name to search for within the occurrences.</param>
+    /// <returns>
+    /// A list of <c>IOccurrenceEsx</c> in which the name contains the specified string.
+    /// Returns <c>null</c> if no matches are found.
+    /// </returns>
+    public static List<IOccurrenceEsx>? FindOccurrencesByName(this AssemblyDocument asm, string name)
+    {
+        var result = new List<IOccurrenceEsx>();
+        asm.TraverseOccurrencesWithAction((IOccurrenceEsx occ) =>
+        {
+            if (occ.Name.Contains(name, StringComparison.OrdinalIgnoreCase))
+            {
+                result.Add(occ);
+            }
+        });
+        return (result.Count > 0) ? result : null;
+    }
+
+    /// <summary>
+    /// Finds an occurrence in the assembly document by its unique identifier without switching assembly context.
+    /// </summary>
+    /// <param name="asm">The assembly document to traverse.</param>
+    /// <param name="id">The unique identifier of the occurrence to find.</param>
+    /// <returns>
+    /// The occurrence with the specified identifier if found, otherwise null.
+    /// </returns>
+    public static IOccurrenceEsx? FindOccurrencesById(this AssemblyDocument asm, int id)
+    {
+        IOccurrenceEsx? result = null;
+        asm.TraverseOccurrencesWithAction((IOccurrenceEsx occ) =>
+        {
+            if (occ.OccurrenceId == id)
+            {
+                result = occ;
+            }
+        });
+        return result;
+    }
 }

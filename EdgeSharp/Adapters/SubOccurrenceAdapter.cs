@@ -23,6 +23,10 @@ public class SubOccurrenceAdapter : IOccurrenceEsx
 
     public object OccurrenceDocument => _subOccurrence.ThisAsOccurrence.OccurrenceDocument;
     
+    public Occurrence ThisAsOccurrence => _subOccurrence.ThisAsOccurrence;
+    
+    public int OccurrenceId => _subOccurrence.ThisAsOccurrence.OccurrenceID;
+    
     public SolidEdgeDocument SEDocEsx => (SolidEdgeDocument)_subOccurrence.SubOccurrenceDocument;
 
     public string OccurrenceFileName => _subOccurrence.SubOccurrenceFileName;
@@ -30,6 +34,8 @@ public class SubOccurrenceAdapter : IOccurrenceEsx
     public ObjectType Type => _subOccurrence.Type;
     
     public DocumentTypeConstants DocumentTypeEsx => _subOccurrence.GetSeDocument().Type;
+
+    public string OccurrenceType => EsxDocumentTypeConstants.SubOccurrenceDocument;
 
     public bool Visible
     {

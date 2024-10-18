@@ -4,6 +4,31 @@ using SolidEdgeFramework;
 
 namespace EdgeSharp.Adapters;
 
+// TODO: This factory should probably go somewhere else. It was dropped here for rapid prototyping
+/// <summary>
+/// A factory class responsible for creating instances of IOccurrenceEsx from COM objects.
+/// </summary>
+public static class OccurrenceFactory
+{
+    /// <summary>
+    /// Creates an instance of IOccurrenceEsx from a given COM object of type Occurrence or SubOccurrence.
+    /// </summary>
+    /// <param name="comObject">The COM object to be adapted into an IOccurrenceEsx instance.</param>
+    /// <returns>An instance of IOccurrenceEsx if the adaptation is successful; otherwise, null.</returns>
+    public static IOccurrenceEsx? Create(object comObject)
+    {
+        if (comObject is SubOccurrence subOccurrence)
+        {
+            return new SubOccurrenceAdapter(subOccurrence);
+        }
+        if (comObject is Occurrence occurrence)
+        {
+            return new OccurrenceAdapter(occurrence);
+        }
+        throw new InvalidCastException("Object cannot be cast to Occurrence or SubOccurrence.");
+    }
+}
+
 /// <summary>
 /// Represents an occurrence or suboccurrence in a Solid Edge assembly document.
 /// </summary>
@@ -15,6 +40,10 @@ public interface IOccurrenceEsx
     
     public object OccurrenceDocument { get; }
     
+    public Occurrence ThisAsOccurrence { get; }
+    
+    public int OccurrenceId { get; }
+    
     public SolidEdgeDocument SEDocEsx { get; }
 
     public string OccurrenceFileName { get; }
@@ -24,6 +53,8 @@ public interface IOccurrenceEsx
     public ObjectType Type { get; }
     
     public DocumentTypeConstants DocumentTypeEsx { get; }
+
+    string OccurrenceType { get; }
 
     public bool Visible { get; set; }
 

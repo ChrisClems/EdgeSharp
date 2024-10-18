@@ -10,6 +10,12 @@ public class Coordinate
     public double Z { get; set; }
 }
 
+public class EsxDocumentTypeConstants
+{
+    public const string OccurrenceDocument = "OccurrenceDocument";
+    public const string SubOccurrenceDocument = "SubOccurrenceDocument";
+}
+
 /// <summary>
 ///     Represents a structural frame section.
 ///     A custom type to organize structural frame section/segment properties.
