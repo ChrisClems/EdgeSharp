@@ -1,4 +1,5 @@
-﻿using EdgeSharp.Adapters;
+﻿using System.Runtime.InteropServices;
+using EdgeSharp.Adapters;
 using SolidEdgeAssembly;
 using SolidEdgeFramework;
 
@@ -7,15 +8,33 @@ namespace EdgeSharp.Extensions;
 public static class IOccurrenceEsxExtensions
 {
     /// <summary>
-    /// Retrieves the associated SolidEdgeDocument of the occurrence.
+    /// Retrieves the AssemblyDocument in which the currently shown FaceStyle is set when viewing from a higher level in the assembly tree.
     /// </summary>
-    /// <param name="occurrence">The occurrence to retrieve the document from.</param>
-    /// <returns>The associated SolidEdgeDocument.</returns>
-    public static SolidEdgeDocument GetDocumentEsx(this IOccurrenceEsx occurrence)
+    /// <param name="occurrence">The occurrence for which to find the containing AssemblyDocument with a FaceStyle property.</param>
+    /// <returns>The AssemblyDocument that contains the FaceStyle property for the specified occurrence, or null if none is found.</returns>
+    public static AssemblyDocument? GetFaceStyleAssemblyContext(this IOccurrenceEsx occurrence)
     {
-        return (SolidEdgeDocument)occurrence.OccurrenceDocument;
-    }
+        var occurrenceId = occurrence.OccurrenceId;
+        var parentTree = occurrence.GetParentTree();
 
+        foreach (var assembly in parentTree)
+        {
+            var faceOccurrence = assembly.FindOccurrencesById(occurrenceId);
+            try
+            {
+                // Non-existant FaceStyle properties do not return null. They throw E_FAIL
+                // Must catch exception to traverse assemblies searching for FaceStyles.
+                if (faceOccurrence.FaceStyle is FaceStyle faceStyle)
+                {
+                    return assembly;
+                }
+            }
+            catch (COMException){}
+        }
+
+        return null;
+    }
+    
     /// <summary>
     /// Retrieves all parent assemblies of the provided occurrence up to the top level
     /// </summary>
