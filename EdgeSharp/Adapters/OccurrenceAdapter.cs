@@ -1,4 +1,5 @@
-﻿using EdgeSharp.Extensions;
+﻿using System.Runtime.InteropServices;
+using EdgeSharp.Extensions;
 using SolidEdgeAssembly;
 using SolidEdgeFramework;
 using SolidEdgePart;
@@ -32,7 +33,13 @@ public class OccurrenceAdapter : IOccurrenceEsx
 
     public ObjectType Type => _occurrence.Type;
 
-    public DocumentTypeConstants DocumentTypeEsx => _occurrence.GetSeDocument().Type;
+    public DocumentTypeConstants DocumentTypeEsx {
+        get
+        {
+            var seDoc = (SolidEdgeDocument)_occurrence.OccurrenceDocument;
+            return seDoc.Type;
+        }
+    }
 
     public string OccurrenceType => EsxDocumentTypeConstants.OccurrenceDocument;
 
@@ -56,7 +63,21 @@ public class OccurrenceAdapter : IOccurrenceEsx
 
     public object FaceStyle
     {
-        get => _occurrence.FaceStyle;
+        get
+        {
+            try
+            {
+                return _occurrence.FaceStyle;
+            }
+            catch (COMException e)
+            {
+                if (e.Message.Contains("E_FAIL"))
+                {
+                    return null;
+                }
+                throw;
+            }
+        }
         set => _occurrence.FaceStyle = value;
     }
 

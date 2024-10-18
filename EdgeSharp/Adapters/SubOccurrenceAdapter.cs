@@ -33,7 +33,13 @@ public class SubOccurrenceAdapter : IOccurrenceEsx
 
     public ObjectType Type => _subOccurrence.Type;
     
-    public DocumentTypeConstants DocumentTypeEsx => _subOccurrence.GetSeDocument().Type;
+    public DocumentTypeConstants DocumentTypeEsx {
+        get
+        {
+            var seDoc = (SolidEdgeDocument)_subOccurrence.SubOccurrenceDocument;
+            return seDoc.Type;
+        }
+    }
 
     public string OccurrenceType => EsxDocumentTypeConstants.SubOccurrenceDocument;
 
