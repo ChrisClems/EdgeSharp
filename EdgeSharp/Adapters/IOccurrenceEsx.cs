@@ -30,7 +30,7 @@ public static class OccurrenceFactory
 }
 
 /// <summary>
-/// Represents an occurrence or suboccurrence in a Solid Edge assembly document.
+/// Defines shared methods between Occurrence and SubOccurrences so they may be iterated over easily.
 /// </summary>
 public interface IOccurrenceEsx
 {

@@ -6,6 +6,10 @@ using SolidEdgeFramework;
 
 namespace EdgeSharp.Adapters;
 
+/// <summary>
+/// The SubOccurrenceAdapter class provides an interface to interact with a sub-occurrence within a CAD environment.
+/// It extends the functionality and properties of a sub-occurrence to integrate with the overall application.
+/// </summary
 public class SubOccurrenceAdapter : IOccurrenceEsx
 {
     private readonly SubOccurrence _subOccurrence;

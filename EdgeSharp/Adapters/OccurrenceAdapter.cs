@@ -8,6 +8,10 @@ using SolidEdgePart;
 
 namespace EdgeSharp.Adapters;
 
+/// <summary>
+/// The OccurrenceAdapter class provides a wrapper around an Occurrence object,
+/// exposing various properties and methods related to the occurrence in the Solid Edge environment.
+/// </summary>
 public class OccurrenceAdapter : IOccurrenceEsx
 {
     private readonly Occurrence _occurrence;
