@@ -55,7 +55,7 @@ void PrintOccurrenceName(IOccurrenceEsx occurrence)
 }
 // Traverses every occurnece in an assembly recurisvely, running PrintDocumentName() to write the doc name to the console.
 // More advanced functions can be done by document type detection and casting. More helpers to come.
-assemblyDoc.TraverseOccurrencesWithAction(PrintDocumentName, recursive:true);
+assemblyDoc.TraverseOccurrencesWithAction(PrintOccurrenceName, recursive:true);
 ```
 
 The IOcurrenceEsx interface in the above example is an adapter interface for Occurrence and SubOcurrence types so that one may iterate over occurrences within an assembly and access common methods between them without creating two separate code paths.

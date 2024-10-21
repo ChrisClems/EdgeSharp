@@ -15,7 +15,7 @@ public static class OccurrenceFactory
     /// </summary>
     /// <param name="comObject">The COM object to be adapted into an IOccurrenceEsx instance.</param>
     /// <returns>An instance of IOccurrenceEsx if the adaptation is successful; otherwise, null.</returns>
-    public static IOccurrenceEsx? Create(object comObject)
+    public static IOccurrenceEsx Create(object comObject)
     {
         if (comObject is SubOccurrence subOccurrence)
         {
