@@ -209,6 +209,23 @@ public static class AssemblyExtensions
     }
 
     /// <summary>
+    /// Traverses the occurrences of an assembly document and creates a dictionary
+    /// with the names of occurrences as keys and their counts as values.
+    /// </summary>
+    /// <param name="asm">The assembly document to traverse.</param>
+    /// <return>A dictionary with occurrence names as keys and their counts as values.</return>
+    public static Dictionary<string, int> OccurrencesToDict(this AssemblyDocument asm)
+    {
+        var occurrenceDict = new Dictionary<string, int>();
+        asm.TraverseOccurrencesWithAction((IOccurrenceEsx occurrence) =>
+        {
+            if (occurrenceDict.TryAdd(occurrence.Name, 1)) return;
+            occurrenceDict[occurrence.Name]++;
+        });
+        return occurrenceDict;
+    }
+
+    /// <summary>
     ///     Removes parts from an assembly document based on a given property key-value pair.
     /// </summary>
     /// <param name="asm">The assembly document.</param>
