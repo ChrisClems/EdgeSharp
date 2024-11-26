@@ -219,8 +219,9 @@ public static class AssemblyExtensions
         var occurrenceDict = new Dictionary<string, int>();
         asm.TraverseOccurrencesWithAction((IOccurrenceEsx occurrence) =>
         {
-            if (occurrenceDict.TryAdd(occurrence.Name, 1)) return;
-            occurrenceDict[occurrence.Name]++;
+            var occurrenceFileName = occurrence.Name.Split(":")[0];
+            if (occurrenceDict.TryAdd(occurrenceFileName, 1)) return;
+            occurrenceDict[occurrenceFileName]++;
         });
         return occurrenceDict;
     }
