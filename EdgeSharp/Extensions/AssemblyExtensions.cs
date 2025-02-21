@@ -213,14 +213,16 @@ public static class AssemblyExtensions
     /// with the names of occurrences as keys and their counts as values.
     /// </summary>
     /// <param name="asm">The assembly document to traverse.</param>
+    /// <param name="docTypes">Document types to return</param>
     /// <return>A dictionary with occurrence names as keys and their counts as values.</return>
-    public static Dictionary<string, int> OccurrencesToDict(this AssemblyDocument asm)
+    public static Dictionary<string, int> OccurrencesToDict(this AssemblyDocument asm, DocumentTypes docTypes = DocumentTypes.All)
     {
         var occurrenceDict = new Dictionary<string, int>();
         asm.TraverseOccurrencesWithAction((IOccurrenceEsx occurrence) =>
         {
             var app = asm.Application;
             app.DoIdle();
+            if (!docTypes.HasFlag(occurrence.DocumentTypeEsx)) return;
             var occurrenceFileName = occurrence.Name.Split(":")[0];
             if (occurrenceDict.TryAdd(occurrenceFileName, 1)) return;
             occurrenceDict[occurrenceFileName]++;

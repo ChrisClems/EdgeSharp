@@ -10,6 +10,18 @@ public class Coordinate
     public double Z { get; set; }
 }
 
+[Flags]
+public enum DocumentTypes
+{
+    None = 0,
+    PartDocument = 1 << 0,
+    SheetMetalDocument = 1 << 1,
+    AssemblyDocument = 1 << 2,
+    DraftDocument = 1 << 3,
+    All = ~None
+}
+
+
 public class EsxDocumentTypeConstants
 {
     public const string OccurrenceDocument = "OccurrenceDocument";
